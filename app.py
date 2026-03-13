@@ -115,18 +115,21 @@ def validate_arabic_text(text):
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 @app.route("/")
+@login_required
 def index():
     """Grammar analysis page."""
     return render_template("grammar.html", active_page="grammar")
 
 
 @app.route("/spelling")
+@login_required
 def spelling_page():
     """Spelling correction page."""
     return render_template("spelling.html", active_page="spelling")
 
 
 @app.route("/meanings")
+@login_required
 def meanings_page():
     """Meanings & synonyms page."""
     return render_template("meanings.html", active_page="meanings")
@@ -523,6 +526,7 @@ def find_meanings():
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 @app.route("/tashkeel")
+@login_required
 def tashkeel_page():
     """Text diacritization page."""
     return render_template("tashkeel.html", active_page="tashkeel")
@@ -566,6 +570,7 @@ def tashkeel():
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 @app.route("/morphology")
+@login_required
 def morphology_page():
     """Morphological analysis page."""
     return render_template("morphology.html", active_page="morphology")
@@ -610,6 +615,7 @@ def morphology():
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 @app.route("/grammar-bank")
+@login_required
 def grammar_bank_page():
     """Grammar rules reference page."""
     return render_template("grammar_bank.html", active_page="grammar_bank")
@@ -620,6 +626,7 @@ def grammar_bank_page():
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 @app.route("/dictionary")
+@login_required
 def dictionary_page():
     """Multi-dictionary lookup page."""
     return render_template("dictionary.html", active_page="dictionary")

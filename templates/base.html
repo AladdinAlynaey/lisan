@@ -44,6 +44,7 @@
             <img src="{{ url_for('static', filename='img/favicon.png') }}" alt="لِسَان" class="sidebar-logo-img">
             <p class="sidebar-subtitle">اللغة العربية بالذكاء الاصطناعي</p>
         </div>
+        {% if is_logged_in %}
         <nav class="sidebar-nav">
             <a href="/" class="nav-item {% if active_page == 'grammar' %}active{% endif %}" data-page="grammar">
                 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -111,6 +112,7 @@
                 <span class="nav-label">المعاجم اللغوية</span>
             </a>
         </nav>
+        {% endif %}
 
         <!-- Auth Section -->
         <div style="padding: 0.5rem 0.75rem; margin-top: auto; border-top: 1px solid rgba(201,164,60,0.08);">
@@ -158,6 +160,7 @@
     </main>
 
     <!-- ═══ Bottom Nav (Mobile) ═══ -->
+    {% if is_logged_in %}
     <nav class="bottom-nav" id="bottom-nav">
         <a href="/" class="bottom-nav-item {% if active_page == 'grammar' %}active{% endif %}">
             <svg class="bottom-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -213,6 +216,7 @@
             <span>المعاجم</span>
         </a>
     </nav>
+    {% endif %}
 
     <!-- ═══ Loading Overlay ═══ -->
     <div class="loading-overlay" id="loading-overlay">
