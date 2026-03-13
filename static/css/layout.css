@@ -417,6 +417,37 @@ body.no-sidebar .page-container {
     text-decoration: underline;
 }
 
+.mobile-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: auto;
+}
+
+.mobile-hdr-icon {
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.4rem;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.mobile-hdr-icon:hover {
+    background: rgba(201, 164, 60, 0.1);
+}
+
+.mobile-credits-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--gold-primary);
+    background: rgba(201, 164, 60, 0.12);
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+}
+
 .bottom-nav-item {
     display: flex;
     flex-direction: column;

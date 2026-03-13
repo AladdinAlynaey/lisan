@@ -37,6 +37,14 @@
             <p class="mobile-header-sub">اللغة العربية بالذكاء الاصطناعي</p>
             <a href="https://alaadin-alynaey.site/" class="mobile-header-dev">Alaadin Alynaey</a>
         </div>
+        <div class="mobile-header-actions">
+            {% if is_admin %}
+            <a href="/auth/admin" class="mobile-hdr-icon" title="لوحة الإدارة">🛡️</a>
+            {% endif %}
+            <a href="/auth/profile" class="mobile-hdr-icon" title="الملف الشخصي">
+                <span class="mobile-credits-badge">{{ user_credits }}💎</span>
+            </a>
+        </div>
     </header>
     {% endif %}
 
