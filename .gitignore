@@ -1,0 +1,72 @@
+# ══════════════════════════════════════════
+#  Lisan — .gitignore
+# ══════════════════════════════════════════
+
+# ── Python ────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# ── Virtual Environment ──────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── Environment Variables (SECRETS) ──────
+.env
+.env.local
+.env.production
+.env.*.local
+
+# ── Uploads (user data, auto-cleaned) ────
+uploads/
+!uploads/.gitkeep
+
+# ── IDE / Editor ─────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# ── OS Files ─────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.lnk
+
+# ── Logs ─────────────────────────────────
+*.log
+logs/
+npm-debug.log*
+
+# ── Testing & Coverage ──────────────────
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+
+# ── Node (if any) ───────────────────────
+node_modules/
+package-lock.json
+
+# ── PM2 ─────────────────────────────────
+.pm2/
+
+# ── Misc ─────────────────────────────────
+*.bak
+*.tmp
+*.temp
+.gemini/

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}التصحيح الإملائي{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">التصحيح الإملائي</h2>
+    <p class="page-desc">صحّح نصوصك العربية استناداً إلى المعاجم العربية الكبرى مع شرح سبب كل تصحيح</p>
+</div>
+
+<!-- ═══ Input ═══ -->
+<section class="card spell-input">
+    <div class="card-title">
+        <span class="icon">✦</span>
+        أدخل النص للتصحيح
+    </div>
+
+    <textarea id="spell-text" placeholder="اكتب الكلمات أو الجمل هنا لتصحيحها إملائياً..." spellcheck="false"
+        autocomplete="off"></textarea>
+
+    <div class="power-level-group">
+        <div class="power-label">مستوى القوة:</div>
+        <div class="power-selector">
+            <button class="power-btn active" data-power="strong">قوي</button>
+            <button class="power-btn" data-power="med">متوسط</button>
+            <button class="power-btn" data-power="low">محلي</button>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button class="btn btn-primary" id="spell-check-btn">تصحيح النص</button>
+        <button class="btn btn-secondary" id="spell-upload-btn">تصحيح من صورة</button>
+    </div>
+
+    <div class="upload-zone" id="spell-upload-zone">
+        <span class="upload-icon">📷</span>
+        <p>اسحب صورة هنا أو اضغط لرفع صورة</p>
+        <p class="supported">PNG, JPG, WEBP — حد أقصى 10 ميغابايت</p>
+        <input type="file" id="spell-file-input" accept="image/png,image/jpeg,image/webp,image/bmp,image/tiff">
+    </div>
+
+    <div class="upload-preview" id="spell-upload-preview">
+        <div class="preview-thumbnail" id="spell-preview-thumb"></div>
+        <div class="preview-info">
+            <span class="filename" id="spell-filename"></span>
+        </div>
+        <button class="remove-btn" id="spell-remove-file">✕</button>
+    </div>
+</section>
+
+<!-- ═══ Results ═══ -->
+<section class="card spell-results" id="spell-results">
+    <div class="card-title">
+        <span class="icon">◈</span>
+        نتائج التصحيح
+    </div>
+
+    <div class="spell-summary" id="spell-summary"></div>
+    <div id="spell-words"></div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/spelling.js') }}"></script>
+{% endblock %}

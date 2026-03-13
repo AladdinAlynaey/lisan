@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}تحليل إعرابي{% endblock %}
+
+{% block content %}
+<!-- ═══ Page Header ═══ -->
+<div class="page-header">
+    <h2 class="page-title">التحليل الإعرابي</h2>
+    <p class="page-desc">حلّل الجمل العربية إعرابياً بدقة عالية باستخدام الذكاء الاصطناعي</p>
+</div>
+
+<!-- ═══ Input Section ═══ -->
+<section class="card input-section">
+    <div class="card-title">
+        <span class="icon">✦</span>
+        أدخل الجملة
+    </div>
+
+    <textarea id="sentence-input" placeholder="اكتب الجملة العربية هنا..." spellcheck="false"
+        autocomplete="off"></textarea>
+
+    <!-- Power Level Selector -->
+    <div class="power-level-group">
+        <div class="power-label">مستوى القوة:</div>
+        <div class="power-selector">
+            <button class="power-btn active" data-power="strong">قوي</button>
+            <button class="power-btn" data-power="med">متوسط</button>
+            <button class="power-btn" data-power="low">محلي</button>
+        </div>
+        <div class="fallback-note" id="fallback-note" style="display:none;"></div>
+    </div>
+
+    <!-- Mode Selector -->
+    <div class="mode-selector">
+        <button class="mode-btn" data-mode="concise">إعراب مختصر</button>
+        <button class="mode-btn active" data-mode="detailed">إعراب مفصّل</button>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+        <button class="btn btn-primary" id="analyze-btn">تحليل الجملة</button>
+        <button class="btn btn-secondary" id="upload-btn">تحليل الصورة</button>
+    </div>
+
+    <!-- Upload Zone -->
+    <div class="upload-zone" id="upload-zone">
+        <span class="upload-icon">📷</span>
+        <p>اسحب صورة هنا أو اضغط لرفع صورة</p>
+        <p class="supported">PNG, JPG, WEBP — حد أقصى 10 ميغابايت</p>
+        <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp,image/bmp,image/tiff">
+    </div>
+
+    <!-- Upload Preview -->
+    <div class="upload-preview" id="upload-preview">
+        <div class="preview-thumbnail" id="preview-thumbnail"></div>
+        <div class="preview-info">
+            <span class="filename" id="upload-filename"></span>
+            <button class="preview-show-btn" id="preview-show-btn">عرض الصورة</button>
+        </div>
+        <button class="remove-btn" id="remove-file" title="إزالة الملف">✕</button>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="image-modal">
+        <div class="image-modal-content">
+            <img id="image-modal-img" src="" alt="معاينة الصورة">
+            <button class="image-modal-close" id="image-modal-close">✕</button>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Results Section ═══ -->
+<section class="card results-section" id="results-section">
+    <div class="result-header">
+        <div class="card-title">
+            <span class="icon">◈</span>
+            نتيجة التحليل
+        </div>
+        <span class="tier-badge" id="tier-badge"></span>
+    </div>
+
+    <div class="sentence-display">
+        <div id="result-sentence"></div>
+        <div class="sentence-type" id="sentence-type"></div>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="analysis-table">
+            <thead id="analysis-head"></thead>
+            <tbody id="analysis-body"></tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ═══ Chat Section ═══ -->
+<section class="card chat-section" id="chat-section">
+    <div class="chat-header">
+        <div class="card-title" style="margin-bottom:0;">
+            <span class="icon">💬</span>
+            المساعد النحوي
+        </div>
+        <div class="chat-controls">
+            <select class="chat-power-select" id="chat-power-select">
+                <option value="strong">قوي</option>
+                <option value="med">متوسط</option>
+                <option value="low">محلي</option>
+            </select>
+            <button class="chat-clear-btn" id="chat-clear" title="مسح المحادثة">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="اسأل عن الجملة المحللة..." autocomplete="off">
+        <button class="chat-send-btn" id="chat-send">إرسال</button>
+    </div>
+</section>
+
+<!-- ═══ Word Exploration Panel ═══ -->
+<div class="panel-overlay" id="panel-overlay"></div>
+<aside class="explore-panel" id="explore-panel">
+    <div class="explore-header">
+        <h3>استكشاف الكلمة</h3>
+        <button class="explore-close" id="explore-close">✕</button>
+    </div>
+    <div id="explore-content"></div>
+</aside>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}

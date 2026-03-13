@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}المعاني والمرادفات{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">المعاني والمرادفات</h2>
+    <p class="page-desc">ابحث عن معنى أي كلمة عربية مع المرادفات والتضادات وأمثلة الاستخدام</p>
+</div>
+
+<!-- ═══ Search ═══ -->
+<section class="card">
+    <div class="card-title">
+        <span class="icon">✦</span>
+        ابحث عن كلمة
+    </div>
+
+    <div class="meaning-search">
+        <input type="text" id="meaning-word" placeholder="اكتب الكلمة هنا..." autocomplete="off">
+        <button class="btn btn-primary" id="meaning-search-btn" style="flex:none; min-width:120px;">بحث</button>
+    </div>
+
+    <div class="power-level-group">
+        <div class="power-label">مستوى القوة:</div>
+        <div class="power-selector">
+            <button class="power-btn active" data-power="strong">قوي</button>
+            <button class="power-btn" data-power="med">متوسط</button>
+            <button class="power-btn" data-power="low">محلي</button>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Results ═══ -->
+<section class="card meaning-results" id="meaning-results">
+    <div class="meaning-word-title" id="meaning-title"></div>
+    <div class="meaning-word-type" id="meaning-type"></div>
+    <div id="meaning-content"></div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/meanings.js') }}"></script>
+{% endblock %}
