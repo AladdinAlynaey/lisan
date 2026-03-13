@@ -30,6 +30,7 @@
 <body>
 
     <!-- ═══ Mobile Header ═══ -->
+    {% if is_logged_in %}
     <header class="mobile-header" id="mobile-header">
         <img src="{{ url_for('static', filename='img/favicon.png') }}" alt="لِسَان" class="mobile-header-logo">
         <div class="mobile-header-info">
@@ -37,8 +38,10 @@
             <a href="https://alaadin-alynaey.site/" class="mobile-header-dev">Alaadin Alynaey</a>
         </div>
     </header>
+    {% endif %}
 
     <!-- ═══ Sidebar (Desktop) ═══ -->
+    {% if is_logged_in %}
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="{{ url_for('static', filename='img/favicon.png') }}" alt="لِسَان" class="sidebar-logo-img">
@@ -151,6 +154,7 @@
             </div>
         </div>
     </aside>
+    {% endif %}
 
     <!-- ═══ Main Content ═══ -->
     <main class="main-content" id="main-content">
