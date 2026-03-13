@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}التحليل الصرفي{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">التحليل الصرفي</h2>
+    <p class="page-desc">أدخل أي كلمة عربية لتحليلها صرفياً — الجذر، الوزن، المشتقات، والتصريفات</p>
+</div>
+
+<!-- ═══ Search ═══ -->
+<section class="card">
+    <div class="card-title">
+        <span class="icon">✦</span>
+        أدخل الكلمة
+    </div>
+
+    <div class="meaning-search">
+        <input type="text" id="morph-word" placeholder="اكتب الكلمة هنا..." autocomplete="off">
+        <button class="btn btn-primary" id="morph-search-btn" style="flex:none; min-width:120px;">تحليل</button>
+    </div>
+
+    <div class="power-level-group">
+        <div class="power-label">مستوى القوة:</div>
+        <div class="power-selector">
+            <button class="power-btn active" data-power="strong">قوي</button>
+            <button class="power-btn" data-power="med">متوسط</button>
+            <button class="power-btn" data-power="low">محلي</button>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Results ═══ -->
+<section class="card morph-results" id="morph-results">
+    <div class="morph-word-title" id="morph-title"></div>
+    <div class="morph-word-type" id="morph-type"></div>
+    <div id="morph-content"></div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/morphology.js') }}"></script>
+{% endblock %}

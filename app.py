@@ -489,6 +489,147 @@ def find_meanings():
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  Tashkeel (Diacritization) Page & API
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+@app.route("/tashkeel")
+def tashkeel_page():
+    """Text diacritization page."""
+    return render_template("tashkeel.html", active_page="tashkeel")
+
+
+@app.route("/api/tashkeel", methods=["POST"])
+@limiter.limit(Config.RATE_LIMIT_ANALYZE)
+def tashkeel():
+    """Add diacritics to Arabic text."""
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "طلب غير صالح"}), 400
+
+        text = data.get("text", "").strip()
+        power_level = data.get("power_level", "strong")
+
+        valid, msg = validate_arabic_text(text)
+        if not valid:
+            return jsonify({"error": msg}), 400
+
+        result = ai_router.tashkeel(text, power_level)
+
+        return jsonify({
+            "result": result["result"],
+            "tier": result["tier"],
+            "failed_providers": result.get("failed_providers", [])
+        })
+
+    except ProviderError as e:
+        logger.error(f"Tashkeel provider error: {e}")
+        return jsonify({"error": str(e)}), 503
+    except Exception as e:
+        logger.error(f"Tashkeel error: {e}", exc_info=True)
+        return jsonify({"error": "حدث خطأ أثناء التشكيل"}), 500
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  Morphology (Sarf) Page & API
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+@app.route("/morphology")
+def morphology_page():
+    """Morphological analysis page."""
+    return render_template("morphology.html", active_page="morphology")
+
+
+@app.route("/api/morphology", methods=["POST"])
+@limiter.limit(Config.RATE_LIMIT_ANALYZE)
+def morphology():
+    """Perform morphological analysis on an Arabic word."""
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "طلب غير صالح"}), 400
+
+        word = data.get("word", "").strip()
+        power_level = data.get("power_level", "strong")
+
+        if not word:
+            return jsonify({"error": "الرجاء إدخال كلمة"}), 400
+        if len(word) > 100:
+            return jsonify({"error": "الكلمة طويلة جداً"}), 400
+
+        result = ai_router.morphology(word, power_level)
+
+        return jsonify({
+            "result": result["result"],
+            "tier": result["tier"],
+            "failed_providers": result.get("failed_providers", [])
+        })
+
+    except ProviderError as e:
+        logger.error(f"Morphology error: {e}")
+        return jsonify({"error": str(e)}), 503
+    except Exception as e:
+        logger.error(f"Morphology error: {e}", exc_info=True)
+        return jsonify({"error": "حدث خطأ أثناء التحليل الصرفي"}), 500
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  Grammar Bank (Reference Page)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+@app.route("/grammar-bank")
+def grammar_bank_page():
+    """Grammar rules reference page."""
+    return render_template("grammar_bank.html", active_page="grammar_bank")
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  Dictionary Lookup Page & API
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+@app.route("/dictionary")
+def dictionary_page():
+    """Multi-dictionary lookup page."""
+    return render_template("dictionary.html", active_page="dictionary")
+
+
+@app.route("/api/dictionary", methods=["POST"])
+@limiter.limit(Config.RATE_LIMIT_ANALYZE)
+def dictionary_lookup():
+    """Look up a word in multiple Arabic dictionaries."""
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "طلب غير صالح"}), 400
+
+        word = data.get("word", "").strip()
+        dictionaries = data.get("dictionaries", [])
+        power_level = data.get("power_level", "strong")
+
+        if not word:
+            return jsonify({"error": "الرجاء إدخال كلمة"}), 400
+        if len(word) > 100:
+            return jsonify({"error": "الكلمة طويلة جداً"}), 400
+        if not dictionaries or not isinstance(dictionaries, list):
+            return jsonify({"error": "الرجاء اختيار معجم واحد على الأقل"}), 400
+
+        result = ai_router.dictionary_lookup(word, dictionaries, power_level)
+
+        return jsonify({
+            "result": result["result"],
+            "tier": result["tier"],
+            "failed_providers": result.get("failed_providers", [])
+        })
+
+    except ProviderError as e:
+        logger.error(f"Dictionary error: {e}")
+        return jsonify({"error": str(e)}), 503
+    except Exception as e:
+        logger.error(f"Dictionary error: {e}", exc_info=True)
+        return jsonify({"error": "حدث خطأ أثناء البحث في المعاجم"}), 500
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #  Main
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

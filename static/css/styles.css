@@ -1410,3 +1410,148 @@
         max-width: 100%;
     }
 }
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TASHKEEL PAGE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.tashkeel-results { display: none; }
+.tashkeel-results.visible { display: block; animation: fadeInUp 0.45s ease; }
+
+.tashkeel-full-text {
+    font-family: var(--font-arabic);
+    font-size: 1.5rem;
+    line-height: 2.5;
+    color: var(--gold-primary);
+    background: var(--bg-input);
+    border-radius: var(--radius-sm);
+    padding: 1.25rem 1.5rem;
+    border-right: 4px solid var(--gold-primary);
+    direction: rtl;
+    text-align: right;
+    letter-spacing: 0.5px;
+}
+
+.tashkeel-results textarea {
+    width: 100%;
+    min-height: 110px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: var(--font-arabic);
+    font-size: 1.15rem;
+    line-height: 2;
+    padding: 1rem 1.15rem;
+    resize: vertical;
+    direction: rtl;
+    transition: var(--transition);
+}
+
+.tashkeel-results textarea:focus {
+    outline: none;
+    border-color: var(--gold-primary);
+    box-shadow: 0 0 0 3px var(--gold-dim);
+}
+
+.copy-btn {
+    font-family: var(--font-ui);
+}
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MORPHOLOGY PAGE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.morph-results { display: none; }
+.morph-results.visible { display: block; animation: fadeInUp 0.45s ease; }
+
+.morph-word-title {
+    font-family: var(--font-arabic);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold-primary);
+    margin-bottom: 0.35rem;
+}
+
+.morph-word-type {
+    font-family: var(--font-arabic);
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-bottom: 1.25rem;
+}
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DICTIONARY PAGE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.dict-results { display: none; }
+.dict-results.visible { display: block; animation: fadeInUp 0.45s ease; }
+
+.dict-word-title {
+    font-family: var(--font-arabic);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold-primary);
+    margin-bottom: 1.25rem;
+}
+
+.dict-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+}
+
+.dict-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--radius-sm);
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--font-arabic);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.dict-checkbox:hover {
+    border-color: var(--gold-dim);
+    color: var(--text-primary);
+}
+
+.dict-checkbox input[type="checkbox"] {
+    accent-color: var(--gold-primary);
+    width: 16px;
+    height: 16px;
+}
+
+.dict-checkbox input[type="checkbox"]:checked + span {
+    color: var(--gold-primary);
+    font-weight: 600;
+}
+
+.dict-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--gold-primary);
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    padding: 0;
+}
+
+.btn-link:hover {
+    color: var(--gold-secondary);
+}

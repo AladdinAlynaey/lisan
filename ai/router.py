@@ -16,7 +16,13 @@ from ai.prompts import (
     SPELLING_SYSTEM_PROMPT,
     SPELLING_PROMPT_TEMPLATE,
     MEANINGS_SYSTEM_PROMPT,
-    MEANINGS_PROMPT_TEMPLATE
+    MEANINGS_PROMPT_TEMPLATE,
+    TASHKEEL_SYSTEM_PROMPT,
+    TASHKEEL_PROMPT_TEMPLATE,
+    MORPHOLOGY_SYSTEM_PROMPT,
+    MORPHOLOGY_PROMPT_TEMPLATE,
+    DICTIONARY_SYSTEM_PROMPT,
+    DICTIONARY_PROMPT_TEMPLATE
 )
 
 logger = logging.getLogger(__name__)
@@ -182,6 +188,61 @@ class AIRouter:
 
         messages = [
             {"role": "system", "content": MEANINGS_SYSTEM_PROMPT},
+            {"role": "user", "content": user_prompt}
+        ]
+
+        response_text, tier, failed = self._try_providers(messages, power_level)
+        result = self._parse_json_response(response_text)
+
+        return {
+            "result": result,
+            "tier": tier,
+            "failed_providers": failed
+        }
+
+    def tashkeel(self, text, power_level="strong"):
+        """Add diacritics (tashkeel) to Arabic text."""
+        user_prompt = TASHKEEL_PROMPT_TEMPLATE.format(text=text)
+
+        messages = [
+            {"role": "system", "content": TASHKEEL_SYSTEM_PROMPT},
+            {"role": "user", "content": user_prompt}
+        ]
+
+        response_text, tier, failed = self._try_providers(messages, power_level)
+        result = self._parse_json_response(response_text)
+
+        return {
+            "result": result,
+            "tier": tier,
+            "failed_providers": failed
+        }
+
+    def morphology(self, word, power_level="strong"):
+        """Perform morphological (Sarf) analysis on an Arabic word."""
+        user_prompt = MORPHOLOGY_PROMPT_TEMPLATE.format(word=word)
+
+        messages = [
+            {"role": "system", "content": MORPHOLOGY_SYSTEM_PROMPT},
+            {"role": "user", "content": user_prompt}
+        ]
+
+        response_text, tier, failed = self._try_providers(messages, power_level)
+        result = self._parse_json_response(response_text)
+
+        return {
+            "result": result,
+            "tier": tier,
+            "failed_providers": failed
+        }
+
+    def dictionary_lookup(self, word, dictionaries, power_level="strong"):
+        """Look up a word in multiple Arabic dictionaries."""
+        dict_str = "، ".join(dictionaries)
+        user_prompt = DICTIONARY_PROMPT_TEMPLATE.format(word=word, dictionaries=dict_str)
+
+        messages = [
+            {"role": "system", "content": DICTIONARY_SYSTEM_PROMPT},
             {"role": "user", "content": user_prompt}
         ]
 

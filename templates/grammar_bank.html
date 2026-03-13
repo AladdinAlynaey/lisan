@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+
+{% block title %}بنك القواعد{% endblock %}
+
+{% block extra_css %}
+<style>
+    .rules-section { margin-bottom: 2rem; }
+    .rules-section .card-title { cursor: pointer; user-select: none; display: flex; align-items: center; gap: 0.5rem; }
+    .rules-section .card-title .toggle { transition: transform 0.3s; display: inline-block; }
+    .rules-section .card-title .toggle.open { transform: rotate(90deg); }
+    .rules-body { padding: 0 1rem 1rem; }
+    .rule-item { background: var(--bg-secondary, rgba(255,255,255,0.04)); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 0.75rem; border-right: 3px solid var(--accent, #c9a43c); }
+    .rule-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--text-primary, #e8e0d0); }
+    .rule-desc { color: var(--text-secondary, #a89d8c); line-height: 1.8; font-size: 0.95rem; }
+    .rule-example { background: var(--bg-tertiary, rgba(201,164,60,0.08)); border-radius: 8px; padding: 0.75rem 1rem; margin-top: 0.5rem; font-size: 0.95rem; color: var(--accent, #c9a43c); }
+    .rule-example strong { color: var(--text-primary, #e8e0d0); }
+    .rule-special { background: rgba(255, 107, 107, 0.08); border-right-color: #ff6b6b; }
+    .rule-special .rule-title { color: #ff6b6b; }
+    .tab-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tab-btn { padding: 0.6rem 1.2rem; border-radius: 8px; border: 1px solid var(--border, rgba(201,164,60,0.15)); background: transparent; color: var(--text-secondary, #a89d8c); cursor: pointer; font-family: inherit; font-size: 0.9rem; transition: all 0.2s; }
+    .tab-btn.active { background: var(--accent, #c9a43c); color: #1a1510; border-color: var(--accent, #c9a43c); font-weight: 600; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">بنك قواعد اللغة العربية</h2>
+    <p class="page-desc">مرجع سريع وشامل لقواعد النحو والإملاء مع أمثلة وحالات خاصة</p>
+</div>
+
+<!-- Tab Bar -->
+<div class="tab-bar" id="tab-bar">
+    <button class="tab-btn active" data-tab="nahw">قواعد النحو</button>
+    <button class="tab-btn" data-tab="imla">قواعد الإملاء</button>
+    <button class="tab-btn" data-tab="special">حالات خاصة</button>
+</div>
+
+<!-- ═══ Tab: Grammar Rules (النحو) ═══ -->
+<div class="tab-panel active" id="tab-nahw">
+
+<section class="card rules-section">
+    <div class="card-title" onclick="this.querySelector('.toggle').classList.toggle('open'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">
+        <span class="toggle open">▶</span>
+        <span class="icon">📖</span> أقسام الكلام
+    </div>
+    <div class="rules-body">
+        <div class="rule-item">
+            <div class="rule-title">الاسم</div>
+            <div class="rule-desc">ما دلّ على معنى في نفسه غير مقترن بزمان. يقبل التنوين، والألف واللام، والجرّ، والنداء.</div>
+            <div class="rule-example"><strong>مثال:</strong> كتابٌ، المدرسةُ، رجلٌ كريمٌ</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">الفعل</div>
+            <div class="rule-desc">ما دلّ على حدث مقترن بزمان. ينقسم إلى: ماضٍ (فتح آخره)، مضارع (يقبل السين وسوف ولم)، أمر (يدلّ على الطلب).</div>
+            <div class="rule-example"><strong>مثال:</strong> كَتَبَ (ماضٍ)، يَكْتُبُ (مضارع)، اُكْتُبْ (أمر)</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">الحرف</div>
+            <div class="rule-desc">ما دلّ على معنى في غيره ولا يقبل علامات الاسم أو الفعل. مثل حروف الجر والعطف والنصب والجزم.</div>
+            <div class="rule-example"><strong>مثال:</strong> في، على، إلى، من، لم، لن، إنّ، أنّ</div>
+        </div>
+    </div>
+</section>
+
+<section class="card rules-section">
+    <div class="card-title" onclick="this.querySelector('.toggle').classList.toggle('open'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">
+        <span class="toggle open">▶</span>
+        <span class="icon">📝</span> الجملة الاسمية والفعلية
+    </div>
+    <div class="rules-body">
+        <div class="rule-item">
+            <div class="rule-title">الجملة الاسمية</div>
+            <div class="rule-desc">تبدأ باسم وتتكون من مبتدأ وخبر. المبتدأ مرفوع والخبر مرفوع.</div>
+            <div class="rule-example"><strong>مثال:</strong> العِلْمُ نورٌ — العلم: مبتدأ مرفوع، نور: خبر مرفوع</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">الجملة الفعلية</div>
+            <div class="rule-desc">تبدأ بفعل وتتكون من فعل وفاعل (وقد يأتي مفعول به). الفاعل مرفوع والمفعول به منصوب.</div>
+            <div class="rule-example"><strong>مثال:</strong> قرأَ الطالبُ الكتابَ — الطالب: فاعل مرفوع، الكتاب: مفعول به منصوب</div>
+        </div>
+    </div>
+</section>
+
+<section class="card rules-section">
+    <div class="card-title" onclick="this.querySelector('.toggle').classList.toggle('open'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">
+        <span class="toggle open">▶</span>
+        <span class="icon">🔤</span> علامات الإعراب
+    </div>
+    <div class="rules-body">
+        <div class="rule-item">
+            <div class="rule-title">علامات الرفع</div>
+            <div class="rule-desc">الضمة (الأصل)، الألف (المثنى)، الواو (جمع المذكر السالم والأسماء الخمسة).</div>
+            <div class="rule-example"><strong>مثال:</strong> جاءَ المعلمُ، جاءَ المعلمانِ، جاءَ المعلمونَ، جاءَ أبوكَ</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">علامات النصب</div>
+            <div class="rule-desc">الفتحة (الأصل)، الياء (المثنى وجمع المذكر السالم)، الألف (الأسماء الخمسة)، الكسرة (جمع المؤنث السالم).</div>
+            <div class="rule-example"><strong>مثال:</strong> رأيتُ الطالبَ، رأيتُ الطالبَيْنِ، رأيتُ الطالباتِ</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">علامات الجر</div>
+            <div class="rule-desc">الكسرة (الأصل)، الياء (المثنى وجمع المذكر السالم والأسماء الخمسة)، الفتحة (الممنوع من الصرف).</div>
+            <div class="rule-example"><strong>مثال:</strong> مررتُ بالمعلمِ، بالمعلمَيْنِ، بأحمدَ (ممنوع من الصرف)</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">علامات الجزم</div>
+            <div class="rule-desc">السكون (الأصل)، حذف النون (الأفعال الخمسة)، حذف حرف العلة (المعتل الآخر).</div>
+            <div class="rule-example"><strong>مثال:</strong> لم يكتبْ، لم يكتبوا، لم يمشِ</div>
+        </div>
+    </div>
+</section>
+
+<section class="card rules-section">
+    <div class="card-title" onclick="this.querySelector('.toggle').classList.toggle('open'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">
+        <span class="toggle">▶</span>
+        <span class="icon">⚡</span> النواصب والجوازم
+    </div>
+    <div class="rules-body" style="display:none;">
+        <div class="rule-item">
+            <div class="rule-title">حروف نصب الفعل المضارع</div>
+            <div class="rule-desc">أنْ، لنْ، كي، إذنْ، حتى، لام التعليل، فاء السببية، واو المعية.</div>
+            <div class="rule-example"><strong>مثال:</strong> أريدُ أنْ أتعلمَ، لنْ أتأخرَ، ذاكرْ كي تنجحَ</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">حروف جزم الفعل المضارع</div>
+            <div class="rule-desc">لمْ، لمّا، لام الأمر، لا الناهية. وأدوات الشرط الجازمة: إنْ، مَنْ، ما، مهما، أين، متى، أيّ.</div>
+            <div class="rule-example"><strong>مثال:</strong> لم يحضرْ، لا تكذبْ، إنْ تدرسْ تنجحْ</div>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<!-- ═══ Tab: Spelling Rules (الإملاء) ═══ -->
+<div class="tab-panel" id="tab-imla">
+
+<section class="card rules-section">
+    <div class="card-title" onclick="this.querySelector('.toggle').classList.toggle('open'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">
+        <span class="toggle open">▶</span>
+        <span class="icon">✏️</span> الهمزات
+    </div>
+    <div class="rules-body">
+        <div class="rule-item">
+            <div class="rule-title">همزة القطع وهمزة الوصل</div>
+            <div class="rule-desc"><strong>همزة القطع:</strong> تُكتب وتُنطق دائماً (أ، إ، أُ). تأتي في الأسماء والأفعال الرباعية والحروف.<br><strong>همزة الوصل:</strong> تُنطق في البدء وتسقط في الوصل (ا). تأتي في: الـ التعريف، أمر الثلاثي، ماضي وأمر الخماسي والسداسي.</div>
+            <div class="rule-example"><strong>مثال:</strong> أحمدُ (قطع)، استغفرَ (وصل)، إنّ (قطع)، اكتبْ (وصل)</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">الهمزة المتوسطة</div>
+            <div class="rule-desc">تُكتب على حرف يناسب أقوى الحركتين (حركتها وحركة ما قبلها). الكسرة أقوى ثم الضمة ثم الفتحة ثم السكون.</div>
+            <div class="rule-example"><strong>مثال:</strong> سُئِل (على ياء)، يَؤُم (على واو)، سَأَل (على ألف)، رَأْس (على ألف)</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">الهمزة المتطرفة</div>
+            <div class="rule-desc">تُكتب على حرف يناسب حركة ما قبلها: كسرة → ياء، ضمة → واو، فتحة → ألف، سكون → السطر.</div>
+            <div class="rule-example"><strong>مثال:</strong> شاطِئ (ياء)، تباطُؤ (واو)، قَرَأ (ألف)، شَيْء (سطر)</div>
+        </div>
+    </div>
+</section>
+
+<section class="card rules-section">
+    <div class="card-title" onclick="this.querySelector('.toggle').classList.toggle('open'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">
+        <span class="toggle open">▶</span>
+        <span class="icon">🔠</span> التاء المربوطة والمبسوطة
+    </div>
+    <div class="rules-body">
+        <div class="rule-item">
+            <div class="rule-title">التاء المربوطة (ة)</div>
+            <div class="rule-desc">تُنطق هاءً عند الوقف. تأتي في: الأسماء المؤنثة، جمع التكسير الذي لا يجمع جمع مذكر سالم، والصفات المؤنثة.</div>
+            <div class="rule-example"><strong>مثال:</strong> مدرسة، فاطمة، قضاة، جميلة</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">التاء المبسوطة (ت)</div>
+            <div class="rule-desc">تُنطق تاءً عند الوقف. تأتي في: تاء الفاعل، تاء التأنيث الساكنة، جمع المؤنث السالم، الأفعال.</div>
+            <div class="rule-example"><strong>مثال:</strong> كتبتُ، ذهبتْ، معلمات، بيت</div>
+        </div>
+    </div>
+</section>
+
+<section class="card rules-section">
+    <div class="card-title" onclick="this.querySelector('.toggle').classList.toggle('open'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">
+        <span class="toggle">▶</span>
+        <span class="icon">📐</span> الألف اللينة
+    </div>
+    <div class="rules-body" style="display:none;">
+        <div class="rule-item">
+            <div class="rule-title">الألف اللينة في الأفعال</div>
+            <div class="rule-desc">تُكتب ألفاً مد (ا) إذا كان أصلها واواً، وياءً (ى) إذا كان أصلها ياءً. يُعرف الأصل بالمضارع.</div>
+            <div class="rule-example"><strong>مثال:</strong> دعا (يدعو → واو → ألف)، مشى (يمشي → ياء → ياء)</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">الألف اللينة في الأسماء</div>
+            <div class="rule-desc">الأسماء الثلاثية: مثل الأفعال. فوق الثلاثية: تُكتب ياءً دائماً إلا إذا سبقها ياء فتكون ألفاً.</div>
+            <div class="rule-example"><strong>مثال:</strong> مصطفى، مستشفى، دنيا (سبقها ياء)</div>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<!-- ═══ Tab: Special Cases ═══ -->
+<div class="tab-panel" id="tab-special">
+
+<section class="card rules-section">
+    <div class="card-title" onclick="this.querySelector('.toggle').classList.toggle('open'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">
+        <span class="toggle open">▶</span>
+        <span class="icon">⚠️</span> الممنوع من الصرف
+    </div>
+    <div class="rules-body">
+        <div class="rule-item rule-special">
+            <div class="rule-title">الممنوع من الصرف</div>
+            <div class="rule-desc">اسم لا يقبل التنوين ويُجر بالفتحة بدل الكسرة. يشمل: الأعلام الأعجمية، صيغ منتهى الجموع (مفاعل/مفاعيل)، الصفات على وزن أفعل، وغيرها.</div>
+            <div class="rule-example"><strong>مثال:</strong> مررتُ بأحمدَ (فتحة بدل كسرة)، في مساجدَ كثيرةٍ</div>
+        </div>
+    </div>
+</section>
+
+<section class="card rules-section">
+    <div class="card-title" onclick="this.querySelector('.toggle').classList.toggle('open'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">
+        <span class="toggle open">▶</span>
+        <span class="icon">🔄</span> إنّ وأخواتها / كان وأخواتها
+    </div>
+    <div class="rules-body">
+        <div class="rule-item rule-special">
+            <div class="rule-title">إنّ وأخواتها (الحروف الناسخة)</div>
+            <div class="rule-desc">تنصب المبتدأ (اسمها) وترفع الخبر (خبرها). وهي: إنّ، أنّ، كأنّ، لكنّ، ليت، لعلّ.</div>
+            <div class="rule-example"><strong>مثال:</strong> إنّ العلمَ نورٌ — العلمَ: اسم إنّ منصوب، نورٌ: خبر إنّ مرفوع</div>
+        </div>
+        <div class="rule-item rule-special">
+            <div class="rule-title">كان وأخواتها (الأفعال الناقصة)</div>
+            <div class="rule-desc">ترفع المبتدأ (اسمها) وتنصب الخبر (خبرها). وهي: كان، أصبح، أمسى، ظلّ، بات، صار، ليس، ما زال، ما دام.</div>
+            <div class="rule-example"><strong>مثال:</strong> كانَ الجوُّ جميلاً — الجوُّ: اسم كان مرفوع، جميلاً: خبر كان منصوب</div>
+        </div>
+    </div>
+</section>
+
+<section class="card rules-section">
+    <div class="card-title" onclick="this.querySelector('.toggle').classList.toggle('open'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">
+        <span class="toggle open">▶</span>
+        <span class="icon">🎯</span> المفاعيل
+    </div>
+    <div class="rules-body">
+        <div class="rule-item">
+            <div class="rule-title">المفعول به</div>
+            <div class="rule-desc">اسم منصوب يقع عليه فعل الفاعل.</div>
+            <div class="rule-example"><strong>مثال:</strong> أكلَ الولدُ التفاحةَ</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">المفعول المطلق</div>
+            <div class="rule-desc">مصدر منصوب من لفظ الفعل أو معناه، يأتي لتأكيد الفعل أو بيان نوعه أو عدده.</div>
+            <div class="rule-example"><strong>مثال:</strong> فرحتُ فرحاً شديداً</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">المفعول لأجله</div>
+            <div class="rule-desc">مصدر منصوب يبيّن سبب وقوع الفعل.</div>
+            <div class="rule-example"><strong>مثال:</strong> وقفتُ احتراماً للمعلم</div>
+        </div>
+        <div class="rule-item">
+            <div class="rule-title">المفعول فيه (الظرف)</div>
+            <div class="rule-desc">اسم منصوب يدل على زمان أو مكان وقوع الفعل.</div>
+            <div class="rule-example"><strong>مثال:</strong> جلستُ أمامَ المنزل، سافرتُ صباحاً</div>
+        </div>
+    </div>
+</section>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function() {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+})();
+</script>
+{% endblock %}

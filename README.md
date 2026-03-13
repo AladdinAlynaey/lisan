@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="static/img/favicon.png" alt="Lisan Logo" width="180">
-</p>
+
 
 <h1 align="center">لِسَان — Lisan</h1>
 
@@ -77,6 +75,45 @@ Click any word in the analysis to explore it deeply:
 - Trilateral/quadrilateral root
 - Morphological pattern (الوزن الصرفي)
 - Synonyms, derived forms, and linguistic notes
+
+### 🔤 Text Diacritization (التشكيل)
+Automatically add full diacritical marks (حركات) to unvoweled Arabic text:
+- Complete tashkeel with Fatha, Damma, Kasra, Sukun, Shadda, and Tanwin
+- Word-by-word breakdown with explanation of **why** each diacritical mark was applied
+- Copy-to-clipboard for the fully diacritized text
+- Based on النحو and الصرف rules for accurate vowelization
+
+### 🔬 Morphological Analysis (التحليل الصرفي)
+Deep Sarf (morphology) analysis for any Arabic word:
+- Root extraction (الجذر) — trilateral or quadrilateral
+- Root type classification (مجرد، مزيد)
+- Morphological pattern (الوزن الصرفي) — e.g., مَفْعَلة، فَعِيل
+- Word type & subtype (اسم مكان، اسم فاعل، صيغة مبالغة...)
+- Full derivatives list with their patterns
+- Verb conjugation (ماضي، مضارع، أمر، مصدر)
+- Related words and detailed linguistic explanation
+
+### 📋 Grammar Rules Bank (بنك القواعد)
+A comprehensive reference section with tabbed interface:
+- **قواعد النحو** — Parts of speech, sentence types, I'rab signs, Nawasib & Jawazim
+- **قواعد الإملاء** — Hamza rules, Ta Marbuta/Mabsuta, Alif Layyina
+- **حالات خاصة** — Mamnu' min al-Sarf, Inna & Kana, Mafa'il
+- Expandable/collapsible sections with examples and special cases
+- Quick reference summaries for students
+
+### 📖 Multi-Dictionary Lookup (المعاجم اللغوية)
+Look up any Arabic word across **8 classical Arabic dictionaries** simultaneously:
+- **لسان العرب** (ابن منظور)
+- **تاج العروس** (الزبيدي)
+- **المعجم الوسيط** (مجمع اللغة العربية)
+- **مختار الصحاح** (الرازي)
+- **القاموس المحيط** (الفيروزآبادي)
+- **الصحاح** (الجوهري)
+- **المصباح المنير** (الفيومي)
+- **معجم العين** (الخليل بن أحمد)
+- Select any combination of dictionaries
+- Shows definition, examples, and notes from each dictionary
+- Comparison between dictionary definitions
 
 ---
 
@@ -275,6 +312,43 @@ Content-Type: application/json
 }
 ```
 
+### Tashkeel (Diacritization)
+
+```http
+POST /api/tashkeel
+Content-Type: application/json
+
+{
+  "text": "ذهب الطالب الى المدرسة",
+  "power_level": "strong"
+}
+```
+
+### Morphological Analysis
+
+```http
+POST /api/morphology
+Content-Type: application/json
+
+{
+  "word": "مكتبة",
+  "power_level": "strong"
+}
+```
+
+### Multi-Dictionary Lookup
+
+```http
+POST /api/dictionary
+Content-Type: application/json
+
+{
+  "word": "كتاب",
+  "dictionaries": ["لسان العرب", "المعجم الوسيط", "تاج العروس"],
+  "power_level": "strong"
+}
+```
+
 ---
 
 ## 🛡️ Security & Rate Limiting
@@ -338,7 +412,11 @@ lisan/
 │   ├── base.html           # Layout with sidebar & mobile nav
 │   ├── grammar.html        # Grammar analysis page
 │   ├── spelling.html       # Spelling correction page
-│   └── meanings.html       # Meanings & synonyms page
+│   ├── meanings.html       # Meanings & synonyms page
+│   ├── tashkeel.html       # Text diacritization page
+│   ├── morphology.html     # Morphological analysis page
+│   ├── grammar_bank.html   # Grammar rules reference
+│   └── dictionary.html     # Multi-dictionary lookup page
 │
 ├── static/
 │   ├── css/
@@ -348,7 +426,10 @@ lisan/
 │   │   ├── layout.js       # Navigation & sidebar logic
 │   │   ├── app.js          # Grammar analysis frontend
 │   │   ├── spelling.js     # Spelling page frontend
-│   │   └── meanings.js     # Meanings page frontend
+│   │   ├── meanings.js     # Meanings page frontend
+│   │   ├── tashkeel.js     # Tashkeel page frontend
+│   │   ├── morphology.js   # Morphology page frontend
+│   │   └── dictionary.js   # Dictionary page frontend
 │   └── img/
 │       └── favicon.png     # Lisan golden logo
 │
@@ -376,7 +457,7 @@ lisan/
 ## 👨‍💻 Developer
 
 <p align="center">
-  Built with ❤️ by <a href="https://alaadin-alynaey.site/"><strong>Alaadin Alynaey</strong></a><br>
+  Made by <a href="https://alaadin-alynaey.site/"><strong>Alaadin Alynaey</strong></a><br>
   AI Engineer
 </p>
 

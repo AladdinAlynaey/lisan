@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}المعاجم اللغوية{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">المعاجم اللغوية</h2>
+    <p class="page-desc">ابحث عن أي كلمة في أشهر المعاجم العربية — اختر المعاجم التي تريد البحث فيها</p>
+</div>
+
+<!-- ═══ Search ═══ -->
+<section class="card">
+    <div class="card-title">
+        <span class="icon">✦</span>
+        ابحث في المعاجم
+    </div>
+
+    <div class="meaning-search">
+        <input type="text" id="dict-word" placeholder="اكتب الكلمة هنا..." autocomplete="off">
+        <button class="btn btn-primary" id="dict-search-btn" style="flex:none; min-width:120px;">بحث</button>
+    </div>
+
+    <!-- Dictionary Selection -->
+    <div class="dict-selection">
+        <div class="card-title" style="font-size: 0.95rem; margin-top: 1rem;">
+            <span class="icon">📚</span>
+            اختر المعاجم:
+        </div>
+        <div class="dict-checkboxes" id="dict-checkboxes">
+            <label class="dict-checkbox"><input type="checkbox" value="لسان العرب" checked><span>لسان العرب</span></label>
+            <label class="dict-checkbox"><input type="checkbox" value="المعجم الوسيط" checked><span>المعجم الوسيط</span></label>
+            <label class="dict-checkbox"><input type="checkbox" value="تاج العروس"><span>تاج العروس</span></label>
+            <label class="dict-checkbox"><input type="checkbox" value="مختار الصحاح"><span>مختار الصحاح</span></label>
+            <label class="dict-checkbox"><input type="checkbox" value="القاموس المحيط"><span>القاموس المحيط</span></label>
+            <label class="dict-checkbox"><input type="checkbox" value="الصحاح"><span>الصحاح</span></label>
+            <label class="dict-checkbox"><input type="checkbox" value="المصباح المنير"><span>المصباح المنير</span></label>
+            <label class="dict-checkbox"><input type="checkbox" value="معجم العين"><span>معجم العين</span></label>
+        </div>
+        <div class="dict-actions">
+            <button class="btn-link" id="dict-select-all">تحديد الكل</button>
+            <button class="btn-link" id="dict-deselect-all">إلغاء الكل</button>
+        </div>
+    </div>
+
+    <div class="power-level-group">
+        <div class="power-label">مستوى القوة:</div>
+        <div class="power-selector">
+            <button class="power-btn active" data-power="strong">قوي</button>
+            <button class="power-btn" data-power="med">متوسط</button>
+            <button class="power-btn" data-power="low">محلي</button>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Results ═══ -->
+<section class="card dict-results" id="dict-results">
+    <div class="dict-word-title" id="dict-title"></div>
+    <div id="dict-content"></div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dictionary.js') }}"></script>
+{% endblock %}

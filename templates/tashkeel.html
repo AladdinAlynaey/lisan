@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}التشكيل{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">تشكيل النص العربي</h2>
+    <p class="page-desc">أدخل نصاً عربياً بدون حركات وسيقوم التطبيق بتشكيله بالكامل تلقائياً</p>
+</div>
+
+<!-- ═══ Input ═══ -->
+<section class="card">
+    <div class="card-title">
+        <span class="icon">✦</span>
+        أدخل النص للتشكيل
+    </div>
+
+    <textarea id="tashkeel-text" placeholder="اكتب النص العربي بدون حركات هنا..." spellcheck="false"
+        autocomplete="off"></textarea>
+
+    <div class="power-level-group">
+        <div class="power-label">مستوى القوة:</div>
+        <div class="power-selector">
+            <button class="power-btn active" data-power="strong">قوي</button>
+            <button class="power-btn" data-power="med">متوسط</button>
+            <button class="power-btn" data-power="low">محلي</button>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button class="btn btn-primary" id="tashkeel-btn">تشكيل النص</button>
+    </div>
+</section>
+
+<!-- ═══ Results ═══ -->
+<section class="card tashkeel-results" id="tashkeel-results">
+    <div class="card-title">
+        <span class="icon">◈</span>
+        النص المشكّل
+    </div>
+
+    <div class="tashkeel-output" id="tashkeel-output"></div>
+    <div id="tashkeel-words"></div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/tashkeel.js') }}"></script>
+{% endblock %}
