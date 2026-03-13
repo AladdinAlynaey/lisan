@@ -348,11 +348,31 @@ body::before {
     filter: drop-shadow(0 0 12px rgba(201, 162, 39, 0.25));
 }
 
+.mobile-header-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .mobile-header-sub {
     font-family: var(--font-arabic);
     font-size: 0.7rem;
     color: var(--text-dim);
     letter-spacing: 0.3px;
+}
+
+.mobile-header-dev {
+    font-size: 0.6rem;
+    color: var(--gold-primary);
+    text-decoration: none;
+    font-family: var(--font-ui);
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.mobile-header-dev:hover {
+    opacity: 1;
+    text-decoration: underline;
 }
 
 .bottom-nav-item {
