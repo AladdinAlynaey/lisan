@@ -39,6 +39,7 @@
             const data = await api('/api/tashkeel', { body: JSON.stringify({ text, power_level: powerLevel }) });
             renderResults(data);
             showToast('تم التشكيل بنجاح', 'success');
+            window.lisan.savePageContent('tashkeel', { result: data.result, inputText: text });
         } catch (err) { showToast(err.message); }
         finally { hideLoading(); dom.btn.disabled = false; }
     }
@@ -84,5 +85,12 @@
         dom.results.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', async () => {
+        init();
+        const saved = await window.lisan.loadPageContent('tashkeel');
+        if (saved && saved.result) {
+            if (saved.inputText) dom.text.value = saved.inputText;
+            renderResults({ result: saved.result });
+        }
+    });
 })();

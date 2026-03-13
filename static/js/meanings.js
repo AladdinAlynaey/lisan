@@ -40,6 +40,7 @@
             const data = await api('/api/meanings', { body: JSON.stringify({ word, power_level: powerLevel }) });
             renderResults(data);
             showToast('تم البحث بنجاح', 'success');
+            window.lisan.savePageContent('meanings', { result: data.result, inputWord: word });
         } catch (err) { showToast(err.message); }
         finally { hideLoading(); dom.searchBtn.disabled = false; }
     }
@@ -106,5 +107,12 @@
         dom.results.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', async () => {
+        init();
+        const saved = await window.lisan.loadPageContent('meanings');
+        if (saved && saved.result) {
+            if (saved.inputWord) dom.wordInput.value = saved.inputWord;
+            renderResults({ result: saved.result });
+        }
+    });
 })();

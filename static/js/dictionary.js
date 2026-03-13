@@ -60,6 +60,7 @@
             });
             renderResults(data);
             showToast('تم البحث بنجاح', 'success');
+            window.lisan.savePageContent('dictionary', { result: data.result, inputWord: word });
         } catch (err) { showToast(err.message); }
         finally { hideLoading(); dom.searchBtn.disabled = false; }
     }
@@ -121,5 +122,12 @@
         dom.results.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', async () => {
+        init();
+        const saved = await window.lisan.loadPageContent('dictionary');
+        if (saved && saved.result) {
+            if (saved.inputWord) dom.wordInput.value = saved.inputWord;
+            renderResults({ result: saved.result });
+        }
+    });
 })();

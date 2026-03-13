@@ -71,7 +71,8 @@
         try {
             const data = await api('/api/spell-check', { body: JSON.stringify({ text, power_level: powerLevel }) });
             renderResults(data);
-            showToast('تم التصحيح بنجاح', 'success');
+            showToast('تم التدقيق بنجاح', 'success');
+            window.lisan.savePageContent('spelling', { result: data.result, inputText: text });
         } catch (err) { showToast(err.message); }
         finally { hideLoading(); dom.checkBtn.disabled = false; }
     }
@@ -89,6 +90,7 @@
             removeFile();
             renderResults(data);
             showToast('تم تصحيح نص الصورة', 'success');
+            window.lisan.savePageContent('spelling', { result: data.result, inputText: dom.text.value });
         } catch (err) { showToast(err.message); }
         finally { hideLoading(); dom.uploadBtn.disabled = false; }
     }
@@ -120,5 +122,12 @@
         dom.results.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', async () => {
+        init();
+        const saved = await window.lisan.loadPageContent('spelling');
+        if (saved && saved.result) {
+            if (saved.inputText) dom.text.value = saved.inputText;
+            renderResults({ result: saved.result });
+        }
+    });
 })();

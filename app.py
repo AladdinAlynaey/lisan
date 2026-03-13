@@ -284,6 +284,8 @@ def analyze_image():
 
 @app.route("/api/chat", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_CHAT)
+@login_required
+@credits_required("chat")
 def chat():
     """
     Handle contextual chat about the analyzed sentence.
@@ -333,6 +335,8 @@ def chat():
 
 @app.route("/api/explore-word", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_CHAT)
+@login_required
+@credits_required("chat")
 def explore_word():
     """
     Explore a specific word linguistically.

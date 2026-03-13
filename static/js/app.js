@@ -132,6 +132,8 @@
             const data = await api('/api/analyze', { body: JSON.stringify({ sentence, mode: state.mode, power_level: state.powerLevel }) });
             state.sentence = data.sentence; state.analysis = data.analysis; state.chatHistory = [];
             renderResults(data); showFallbackNote(data.failed_providers, null); showToast('تم التحليل بنجاح', 'success');
+            // Save to server for persistence
+            window.lisan.savePageContent('grammar', { sentence: data.sentence, analysis: data.analysis, mode: data.mode, tier: data.tier, inputText: dom.sentenceInput.value });
         } catch (err) { showToast(err.message); } finally { hideLoading(); dom.analyzeBtn.disabled = false; }
     }
 
@@ -146,6 +148,7 @@
             state.sentence = data.sentence; state.analysis = data.analysis; state.chatHistory = [];
             dom.sentenceInput.value = data.sentence; removeFile();
             renderResults(data); showFallbackNote(data.failed_providers, data.extraction_method); showToast('تم تحليل الصورة بنجاح', 'success');
+            window.lisan.savePageContent('grammar', { sentence: data.sentence, analysis: data.analysis, mode: data.mode, tier: data.tier, inputText: dom.sentenceInput.value });
         } catch (err) { showToast(err.message); } finally { hideLoading(); dom.uploadBtn.disabled = false; }
     }
 
@@ -313,5 +316,15 @@
         } catch (err) { if (c) c.innerHTML = `<p style="color:var(--danger);">${err.message}</p>`; }
     }
 
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', async () => {
+        init();
+        // Restore saved content
+        const saved = await window.lisan.loadPageContent('grammar');
+        if (saved && saved.sentence && saved.analysis) {
+            state.sentence = saved.sentence;
+            state.analysis = saved.analysis;
+            if (saved.inputText) dom.sentenceInput.value = saved.inputText;
+            renderResults({ sentence: saved.sentence, analysis: saved.analysis, mode: saved.mode || 'detailed', tier: saved.tier || 'Advanced' });
+        }
+    });
 })();
