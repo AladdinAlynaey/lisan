@@ -27,7 +27,7 @@
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
 </head>
 
-<body>
+<body class="{% if not is_logged_in %}no-sidebar{% endif %}">
 
     <!-- ═══ Mobile Header ═══ -->
     {% if is_logged_in %}
@@ -47,6 +47,11 @@
             <img src="{{ url_for('static', filename='img/favicon.png') }}" alt="لِسَان" class="sidebar-logo-img">
             <p class="sidebar-subtitle">اللغة العربية بالذكاء الاصطناعي</p>
         </div>
+        <a href="/auth/profile" class="credits-badge" title="أرصدتك">
+            <span>💎</span>
+            <span class="cb-num">{{ user_credits }}</span>
+            <span class="cb-label">رصيد</span>
+        </a>
         {% if is_logged_in %}
         <nav class="sidebar-nav">
             <a href="/" class="nav-item {% if active_page == 'grammar' %}active{% endif %}" data-page="grammar">
@@ -218,6 +223,13 @@
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
             </svg>
             <span>المعاجم</span>
+        </a>
+        <a href="/auth/profile" class="bottom-nav-item {% if active_page == 'profile' %}active{% endif %}">
+            <svg class="bottom-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span>{{ user_credits }}💎</span>
         </a>
     </nav>
     {% endif %}

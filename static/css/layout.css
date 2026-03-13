@@ -283,6 +283,48 @@ body::before {
     z-index: 1;
 }
 
+/* When no sidebar (logged out / auth pages) */
+body.no-sidebar .main-content {
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.no-sidebar .page-container {
+    padding-top: 0;
+}
+
+/* Credits badge in sidebar */
+.credits-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.75rem;
+    margin: 0 0.75rem 0.5rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(201,162,39,0.12), rgba(201,162,39,0.04));
+    border: 1px solid rgba(201,162,39,0.18);
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+.credits-badge:hover {
+    border-color: var(--gold-primary);
+    background: rgba(201,162,39,0.15);
+}
+.credits-badge .cb-num {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--gold-primary);
+    min-width: 1.5rem;
+    text-align: center;
+}
+.credits-badge .cb-label {
+    color: var(--text-dim);
+    font-size: 0.7rem;
+}
+
 .page-container {
     max-width: 900px;
     margin: 0 auto;
