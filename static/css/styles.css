@@ -1394,20 +1394,64 @@
 
 @media (max-width: 480px) {
     .card {
-        padding: 1rem;
+        padding: 0.85rem;
     }
 
     .card-title {
-        font-size: 1.05rem;
+        font-size: 1rem;
     }
 
     .sentence-display {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
 
     .explore-panel {
         width: 100%;
         max-width: 100%;
+    }
+
+    .dict-checkboxes {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 0.4rem;
+    }
+
+    .tashkeel-full-text {
+        font-size: 1.2rem;
+        padding: 0.85rem 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .card {
+        padding: 0.7rem;
+        border-radius: 10px;
+    }
+
+    .card-title {
+        font-size: 0.92rem;
+        gap: 0.35rem;
+    }
+
+    .dict-checkboxes {
+        grid-template-columns: 1fr;
+    }
+
+    .power-selector {
+        gap: 0.25rem;
+    }
+
+    .power-btn {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .rule-item {
+        padding: 0.75rem 0.85rem;
+    }
+
+    .tab-btn {
+        padding: 0.45rem 0.85rem;
+        font-size: 0.8rem;
     }
 }
 

@@ -152,15 +152,15 @@ body::before {
 }
 
 .sidebar-logo-img {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(201, 162, 39, 0.2));
     transition: var(--transition);
 }
 
 .sidebar-logo-img:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
     filter: drop-shadow(0 0 30px rgba(201, 162, 39, 0.35));
 }
 
@@ -329,8 +329,9 @@ body::before {
 .mobile-header {
     display: none;
     align-items: center;
+    justify-content: center;
     gap: 0.75rem;
-    padding: 0.85rem 1.25rem;
+    padding: 0.65rem 1rem;
     background: rgba(14, 14, 14, 0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -341,29 +342,15 @@ body::before {
 }
 
 .mobile-header-logo {
-    width: 42px;
-    height: 42px;
+    width: 52px;
+    height: 52px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(201, 162, 39, 0.2));
-}
-
-.mobile-header-text {
-    display: flex;
-    flex-direction: column;
-}
-
-.mobile-header-title {
-    font-family: var(--font-arabic);
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--gold-primary);
-    line-height: 1.1;
-    letter-spacing: 1px;
+    filter: drop-shadow(0 0 12px rgba(201, 162, 39, 0.25));
 }
 
 .mobile-header-sub {
     font-family: var(--font-arabic);
-    font-size: 0.62rem;
+    font-size: 0.7rem;
     color: var(--text-dim);
     letter-spacing: 0.3px;
 }
@@ -659,20 +646,51 @@ body::before {
 
 @media (max-width: 480px) {
     .page-container {
-        padding: 1.25rem 0.75rem 2rem;
+        padding: 1rem 0.65rem 2rem;
     }
 
     .page-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 
     .bottom-nav-item {
         font-size: 0.6rem;
-        min-width: 56px;
+        min-width: 48px;
+        padding: 0.4rem 0.5rem;
     }
 
     .bottom-nav-icon {
         width: 20px;
         height: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    .page-container {
+        padding: 0.75rem 0.5rem 2rem;
+    }
+
+    .page-title {
+        font-size: 1.1rem;
+    }
+
+    .bottom-nav-item {
+        font-size: 0.55rem;
+        min-width: 42px;
+        padding: 0.35rem 0.35rem;
+    }
+
+    .bottom-nav-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .mobile-header-logo {
+        width: 44px;
+        height: 44px;
+    }
+
+    .mobile-header-sub {
+        font-size: 0.6rem;
     }
 }
