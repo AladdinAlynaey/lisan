@@ -54,9 +54,76 @@
         const data = await response.json();
 
         if (!response.ok) {
+            // Handle auth/credits errors
+            if (data.redirect) {
+                window.location.href = data.redirect;
+                throw new Error('redirecting');
+            }
+            if (data.no_credits) {
+                window.lisan.showToast('لا توجد أرصدة كافية! اشترِ أرصدة من صفحة الملف الشخصي.', 'error');
+                window.lisan.updateCreditsDisplay(0);
+                throw new Error(data.error || 'لا توجد أرصدة');
+            }
             throw new Error(data.error || 'حدث خطأ غير متوقع');
         }
+
+        // Refresh credits display after successful API call
+        window.lisan.refreshCredits();
+
         return data;
+    };
+
+    // ── Live Credits Update ───────────────────────
+    window.lisan.refreshCredits = async function () {
+        try {
+            const r = await fetch('/auth/api/me');
+            const d = await r.json();
+            if (d.logged_in) {
+                window.lisan.updateCreditsDisplay(d.credits);
+            }
+        } catch (e) { /* silent */ }
+    };
+
+    window.lisan.updateCreditsDisplay = function (credits) {
+        // Update sidebar badge
+        const sidebarNum = document.querySelector('.credits-badge .cb-num');
+        if (sidebarNum) {
+            sidebarNum.textContent = credits;
+            // Animate
+            sidebarNum.style.transform = 'scale(1.3)';
+            sidebarNum.style.transition = 'transform 0.2s';
+            setTimeout(() => { sidebarNum.style.transform = 'scale(1)'; }, 200);
+        }
+        // Update sidebar profile link
+        const sidebarCredits = document.querySelector('[href="/auth/profile"] span[style*="margin-right"]');
+        if (sidebarCredits) sidebarCredits.textContent = credits;
+        // Update mobile bottom nav profile
+        const mobileItems = document.querySelectorAll('.bottom-nav-item');
+        mobileItems.forEach(item => {
+            if (item.href && item.href.includes('/auth/profile')) {
+                const span = item.querySelector('span');
+                if (span) span.textContent = credits + '💎';
+            }
+        });
+    };
+
+    // ── Content Persistence (localStorage, 30 min) ─
+    window.lisan.savePageContent = function (key, data) {
+        const entry = { data, ts: Date.now() };
+        try { localStorage.setItem('lisan_' + key, JSON.stringify(entry)); } catch (e) {}
+    };
+
+    window.lisan.loadPageContent = function (key, maxAgeMs = 30 * 60 * 1000) {
+        try {
+            const raw = localStorage.getItem('lisan_' + key);
+            if (!raw) return null;
+            const entry = JSON.parse(raw);
+            if (Date.now() - entry.ts > maxAgeMs) {
+                localStorage.removeItem('lisan_' + key);
+                return null;
+            }
+            return entry.data;
+        } catch (e) { return null; }
     };
 
     // ── Loading with Logs ──────────────────────────
