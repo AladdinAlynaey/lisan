@@ -1,119 +1,78 @@
+<div align="center">
 
+<img src="static/img/favicon.png" alt="Lisan Logo" width="120" height="120" style="border-radius: 20px;">
 
-<h1 align="center">لِسَان — Lisan</h1>
+# لِسَان — Lisan
 
-<p align="center">
-  <strong>AI-Powered Arabic Grammar Learning Platform</strong><br>
-  <em>Master Arabic grammar, spelling, and vocabulary with the power of Artificial Intelligence</em>
-</p>
+### 🌟 AI-Powered Arabic Language Learning Platform
 
-<p align="center">
-  <a href="https://lisan.alaadin-alynaey.site">🌐 Live Demo</a> •
-  <a href="#features">✨ Features</a> •
-  <a href="#architecture">🏗️ Architecture</a> •
-  <a href="#getting-started">🚀 Getting Started</a> •
-  <a href="#api-reference">📡 API</a>
-</p>
+*Master Arabic grammar, spelling, morphology, and more — powered by cutting-edge AI*
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/Flask-3.x-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
-  <img src="https://img.shields.io/badge/Gunicorn-gevent-499848?style=for-the-badge&logo=gunicorn&logoColor=white" alt="Gunicorn">
-  <img src="https://img.shields.io/badge/AI-Multi--Provider-FF6B6B?style=for-the-badge&logo=openai&logoColor=white" alt="AI">
-  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License">
-</p>
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-3.0+-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
+[![Elasticsearch](https://img.shields.io/badge/Elasticsearch-8.x-005571?style=for-the-badge&logo=elasticsearch&logoColor=white)](https://elastic.co)
+[![License](https://img.shields.io/badge/License-Private-C9A227?style=for-the-badge)](LICENSE)
 
 ---
 
-## 🌟 What is Lisan?
+**[🌐 Live Demo](https://lisan.alaadin-alynaey.site)** · **[📧 Contact](mailto:alaadinalynaey@gmail.com)**
 
-**Lisan** (لِسَان — Arabic for "tongue" or "language") is a full-stack, production-grade Arabic grammar learning platform powered by multiple AI providers. It provides instant, precise **I'rab (إعراب)** — the classical Arabic grammatical analysis that determines the syntactic role and case ending of every word in a sentence.
+</div>
 
-Built for students, educators, and Arabic language enthusiasts, Lisan makes the notoriously complex world of Arabic grammar accessible through an intelligent, beautiful interface that supports **thousands of daily users** with enterprise-grade reliability.
+---
 
-> 🎯 **The Problem**: Arabic grammar (النحو العربي) is one of the most complex grammatical systems in any language. Students spend years mastering I'rab rules across Sibawayh, Ibn Malik, and Ibn Hisham's classical frameworks. Lisan democratizes this knowledge with AI.
+## 📋 Table of Contents
+
+- [Overview](#-overview)
+- [Features](#-features)
+- [Architecture](#-architecture)
+- [Tech Stack](#-tech-stack)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+- [AI Models](#-ai-models)
+- [Credits System](#-credits-system)
+- [Authentication](#-authentication)
+- [API Reference](#-api-reference)
+- [Project Structure](#-project-structure)
+- [Deployment](#-deployment)
+- [Developer](#-developer)
+
+---
+
+## 🌟 Overview
+
+**Lisan (لِسَان)** is a comprehensive AI-powered Arabic language platform that provides real-time grammar analysis, spelling correction, diacritization (tashkeel), morphological analysis, dictionary lookup, and an extensive grammar rules bank. Built with a sleek dark-themed UI and designed for both students and professionals of the Arabic language.
+
+> **لِسَان** — اسم عربي يعني "اللغة" و"اللسان"، ويرمز إلى جوهر التواصل والتعبير في اللغة العربية
 
 ---
 
 ## ✨ Features
 
-### 📖 Grammar Analysis (الإعراب)
-The heart of Lisan. Submit any Arabic sentence and receive a complete grammatical breakdown:
+### 🔤 Core Language Tools
 
-- **Concise Mode** — Quick I'rab for each word (word + grammatical role)
-- **Detailed Mode** — Full analysis including:
-  - Word type (اسم، فعل، حرف)
-  - Complete I'rab (الإعراب الكامل)
-  - Case ending (العلامة الإعرابية)
-  - Grammatical role (الدور النحوي)
-  - Detailed explanation of **why** each word has its specific I'rab
-- **Image Analysis** — Upload an image containing Arabic text, and Lisan extracts and analyzes it automatically via AI vision models
+| Feature | Description | Credit Cost |
+|:--------|:-----------|:----------:|
+| **📖 الإعراب — Grammar Analysis** | Full i'rab analysis of Arabic sentences with detailed grammatical breakdowns | 0.5 – 1.0 |
+| **✏️ التدقيق الإملائي — Spelling Check** | AI-powered spelling correction with explanations | 0.5 – 1.0 |
+| **🔊 تشكيل النص — Tashkeel** | Automatic diacritization of Arabic text | 0.5 |
+| **🔬 التحليل الصرفي — Morphology** | Root extraction, pattern analysis, verb conjugation | 0.5 |
+| **📚 المعاجم اللغوية — Dictionary** | Multi-dictionary lookup with cross-referencing | 0.5 – 1.0 |
+| **💡 المعاني — Meanings** | Contextual meaning analysis and synonyms | 0.5 |
+| **📐 بنك القواعد — Grammar Bank** | 50+ Arabic grammar rules with examples | Free |
 
-### ✏️ Spelling Correction (التصحيح الإملائي)
-AI-powered spelling checker grounded in classical Arabic dictionaries:
-- Detects and corrects spelling errors
-- Explains the **rule** behind each correction (e.g., همزة القطع vs. همزة الوصل)
-- Supports image input for handwritten/printed text correction
-- References: لسان العرب، المعجم الوسيط، تاج العروس
+### 📸 Image Analysis
+Upload images of Arabic text — the AI extracts and analyzes them automatically.
 
-### 📚 Meanings & Synonyms (المعاني والمرادفات)
-A smart Arabic dictionary powered by AI:
-- Full word meaning with linguistic context
-- Root extraction (الجذر) and morphological pattern (الوزن الصرفي)
-- Synonyms (مرادفات) and antonyms (أضداد)
-- Usage examples in complete sentences
+### 💬 Contextual Chat
+Ask follow-up questions about any analysis. The AI remembers context for natural conversation.
 
-### 💬 Contextual Grammar Chat (المساعد النحوي)
-An AI chat assistant that answers questions **about the analyzed sentence**:
-- Ask follow-up questions about any word's I'rab
-- Get explanations of grammatical rules
-- Maintains conversation context for natural dialogue
-- References classical grammar authorities (Sibawayh, Ibn Malik, Ibn Hisham)
-
-### 🔍 Word Exploration (استكشاف الكلمة)
-Click any word in the analysis to explore it deeply:
-- Trilateral/quadrilateral root
-- Morphological pattern (الوزن الصرفي)
-- Synonyms, derived forms, and linguistic notes
-
-### 🔤 Text Diacritization (التشكيل)
-Automatically add full diacritical marks (حركات) to unvoweled Arabic text:
-- Complete tashkeel with Fatha, Damma, Kasra, Sukun, Shadda, and Tanwin
-- Word-by-word breakdown with explanation of **why** each diacritical mark was applied
-- Copy-to-clipboard for the fully diacritized text
-- Based on النحو and الصرف rules for accurate vowelization
-
-### 🔬 Morphological Analysis (التحليل الصرفي)
-Deep Sarf (morphology) analysis for any Arabic word:
-- Root extraction (الجذر) — trilateral or quadrilateral
-- Root type classification (مجرد، مزيد)
-- Morphological pattern (الوزن الصرفي) — e.g., مَفْعَلة، فَعِيل
-- Word type & subtype (اسم مكان، اسم فاعل، صيغة مبالغة...)
-- Full derivatives list with their patterns
-- Verb conjugation (ماضي، مضارع، أمر، مصدر)
-- Related words and detailed linguistic explanation
-
-### 📋 Grammar Rules Bank (بنك القواعد)
-A comprehensive reference section with tabbed interface:
-- **قواعد النحو** — Parts of speech, sentence types, I'rab signs, Nawasib & Jawazim
-- **قواعد الإملاء** — Hamza rules, Ta Marbuta/Mabsuta, Alif Layyina
-- **حالات خاصة** — Mamnu' min al-Sarf, Inna & Kana, Mafa'il
-- Expandable/collapsible sections with examples and special cases
-- Quick reference summaries for students
-
-### 📖 Multi-Dictionary Lookup (المعاجم اللغوية)
-Look up any Arabic word across **8 classical Arabic dictionaries** simultaneously:
-- **لسان العرب** (ابن منظور)
-- **تاج العروس** (الزبيدي)
-- **المعجم الوسيط** (مجمع اللغة العربية)
-- **مختار الصحاح** (الرازي)
-- **القاموس المحيط** (الفيروزآبادي)
-- **الصحاح** (الجوهري)
-- **المصباح المنير** (الفيومي)
-- **معجم العين** (الخليل بن أحمد)
-- Select any combination of dictionaries
-- Shows definition, examples, and notes from each dictionary
-- Comparison between dictionary definitions
+### 🔐 Security & Auth
+- **Email verification** with 6-digit codes via SMTP
+- **Google OAuth** integration for quick sign-in
+- **Disposable email blocking** (100+ temp domains)
+- **Session persistence** — 30 minutes, stored in Elasticsearch
+- **Atomic credit deduction** — race-condition proof via ES scripted updates
 
 ---
 
@@ -121,264 +80,243 @@ Look up any Arabic word across **8 classical Arabic dictionaries** simultaneousl
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                    Client (Browser)                 │
-│  ┌──────────┐  ┌──────────┐  ┌──────────────────┐   │
-│  │ Grammar  │  │ Spelling │  │ Meanings/Synonyms│   │
-│  │  Page    │  │   Page   │  │      Page        │   │
-│  └────┬─────┘  └────┬─────┘  └────────┬─────────┘   │
-│       └──────────────┼────────────────┘             │
-│                      │ REST API (JSON)              │
-└──────────────────────┼──────────────────────────────┘
-                       │
-┌──────────────────────┼──────────────────────────────┐
-│              Flask Application (app.py)             │
-│  ┌───────────────────┼──────────────────────────┐   │
-│  │           AI Router (ai/router.py)           │   │
-│  │  Routes requests to the appropriate provider │   │
-│  │                                              │   │
-│  │  ┌──────────────┐ ┌──────────┐ ┌───────────┐ │   │
-│  │  │ OpenRouter   │ │  Groq    │ │  Ollama   │ │   │
-│  │  │ (Advanced)   │ │(Standard)│ │  (Local)  │ │   │
-│  │  │ Gemini Pro   │ │ GPT-OSS  │ │ Qwen 2.5  │ │   │
-│  │  └──────────────┘ └──────────┘ └───────────┘ │   │
+│                    Client (Browser)                  │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌──────────┐  │
+│  │Grammar  │ │Spelling │ │Tashkeel │ │Dictionary│  │
+│  │ Page    │ │ Page    │ │ Page    │ │ Page     │  │
+│  └────┬────┘ └────┬────┘ └────┬────┘ └────┬─────┘  │
+│       └───────────┼───────────┼───────────┘         │
+│                   ▼                                  │
+│            layout.js (API + Credits + Persistence)   │
+└───────────────────┬─────────────────────────────────┘
+                    │ HTTPS
+┌───────────────────▼─────────────────────────────────┐
+│              Flask Application (app.py)              │
+│  ┌──────────┐ ┌──────────┐ ┌──────────────────────┐ │
+│  │Rate      │ │CSRF      │ │Auth Decorators       │ │
+│  │Limiter   │ │Protection│ │@login @credits @admin│ │
+│  └──────────┘ └──────────┘ └──────────────────────┘ │
+│                                                      │
+│  ┌──────────────── AI Router ───────────────────┐   │
+│  │  Strong ──▶ OpenRouter (gemini-3.1-pro)      │   │
+│  │    ↓ fail    └──▶ fallback (qwen3-coder:free)│   │
+│  │  Medium ──▶ Groq (gpt-oss-120b)             │   │
+│  │  Low    ──▶ Ollama (qwen2.5:7b)             │   │
 │  └──────────────────────────────────────────────┘   │
-│                                                     │
-│  ┌─────────────┐  ┌──────────────┐  ┌────────────┐  │
-│  │ Context Chat│  │ Image Parser │  │  Prompts   │  │
-│  │ (chat/)     │  │ (vision/)    │  │  (ai/)     │  │
-│  └─────────────┘  └──────────────┘  └────────────┘  │
+│                                                      │
+│  ┌──────────────── Auth Module ─────────────────┐   │
+│  │  Signup → Email Verification → Login          │   │
+│  │  Google OAuth │ Profile │ Admin Panel          │   │
+│  │  Credits System │ Receipt Upload               │   │
+│  └──────────────────────────────────────────────┘   │
+└───────────────────┬─────────────────────────────────┘
+                    │
+┌───────────────────▼─────────────────────────────────┐
+│              Elasticsearch 8.x                       │
+│  ┌──────────┐ ┌──────────┐ ┌──────────────────────┐ │
+│  │Users     │ │Sessions  │ │Credit Requests       │ │
+│  │Codes     │ │Content   │ │Verification Codes    │ │
+│  └──────────┘ └──────────┘ └──────────────────────┘ │
 └─────────────────────────────────────────────────────┘
 ```
 
-### 🤖 AI Provider Tiers — Power Level System
+---
 
-Lisan uses a **three-tier AI provider system** with automatic fallback:
+## 🛠️ Tech Stack
 
-| Power Level | Provider | Model | Best For |
-|:-----------:|:--------:|:-----:|:--------:|
-| 🟢 **Strong** (قوي) | OpenRouter | Gemini Pro | Highest accuracy, complex sentences |
-| 🟡 **Medium** (متوسط) | Groq | GPT-OSS 120B | Fast responses, good quality |
-| 🔵 **Local** (محلي) | Ollama | Qwen 2.5 7B | Offline/private usage |
-
-> **Fallback Chain**: If the selected provider fails, Lisan automatically tries the next provider in the chain. This ensures **99.9% uptime** even when individual API services experience issues.
+| Layer | Technology |
+|:------|:----------|
+| **Backend** | Python 3.10+, Flask 3.0, Gunicorn |
+| **Database** | Elasticsearch 8.x |
+| **AI (Strong)** | OpenRouter → Google Gemini 3.1 Pro / Qwen3-Coder |
+| **AI (Medium)** | Groq → GPT-OSS-120B |
+| **AI (Local)** | Ollama → Qwen 2.5 7B |
+| **Auth** | bcrypt, Google OAuth (Authlib), SMTP verification |
+| **Frontend** | Vanilla HTML/CSS/JS, RTL-first design |
+| **Process Manager** | PM2 |
+| **Reverse Proxy** | Nginx |
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Installation
 
 ### Prerequisites
+- Python 3.10+
+- Elasticsearch 8.x running on `localhost:9200`
+- Node.js (for PM2)
+- Nginx (for production)
 
-- Python 3.12+
-- At least one AI provider API key (OpenRouter recommended)
-- PM2 (for production deployment)
-
-### Installation
+### Setup
 
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/AladdinAlynaey/lisan.git
 cd lisan
 
-# Create virtual environment
+# 2. Create virtual environment
 python3 -m venv venv
 source venv/bin/activate
 
-# Install dependencies
+# 3. Install dependencies
 pip install -r requirements.txt
-pip install gunicorn gevent
 
-# Configure environment
+# 4. Configure environment
 cp env.example .env
-# Edit .env with your API keys
+# Edit .env with your API keys and settings
+
+# 5. Run development server
+python app.py
+
+# Or with Gunicorn
+gunicorn -c gunicorn.conf.py app:app
 ```
 
-### Configuration
+### Production Deployment (PM2)
 
-Edit `.env` with your API keys:
+```bash
+# Install PM2 globally
+npm install -g pm2
+
+# Start with PM2
+pm2 start ecosystem.config.js
+
+# Auto-restart on reboot
+pm2 save
+pm2 startup
+```
+
+---
+
+## ⚙️ Configuration
+
+Copy `env.example` to `.env` and configure:
 
 ```env
-# Required: At least one AI provider
-OPENROUTER_API_KEY=your-openrouter-key
-GROQ_API_KEY=your-groq-key
-
-# Optional: Local Ollama
-OLLAMA_BASE_URL=http://localhost:11434
-
-# App Settings
-FLASK_PORT=5018
+# Flask
+FLASK_SECRET_KEY=your-strong-random-secret-key
 FLASK_DEBUG=false
+FLASK_PORT=5018
+
+# AI Providers
+OPENROUTER_API_KEY=sk-or-v1-...
+OPENROUTER_MODEL=google/gemini-3.1-pro-preview
+OPENROUTER_FALLBACK_MODEL=qwen/qwen3-coder:free
+
+GROQ_API_KEY=gsk_...
+GROQ_MODEL=openai/gpt-oss-120b
+
+OLLAMA_MODEL=qwen2.5:7b
+
+# SMTP (Gmail)
+SMTP_EMAIL=your-email@gmail.com
+SMTP_PASSWORD=your-gmail-app-password
+
+# Rate Limiting
+RATE_LIMIT_ANALYZE=10/minute
+RATE_LIMIT_CHAT=20/minute
 ```
 
-### Running in Development
+---
 
-```bash
-source venv/bin/activate
-python app.py
-```
+## 🤖 AI Models
 
-### Running in Production (Recommended)
+Lisan uses a **3-tier AI provider system** with automatic fallback:
 
-```bash
-# Start with PM2 + Gunicorn (gevent async workers)
-pm2 start ecosystem.config.js
-pm2 save
+| Tier | Provider | Model | Use Case |
+|:-----|:---------|:------|:---------|
+| 🟢 **Strong** | OpenRouter | `google/gemini-3.1-pro-preview` | Best quality analysis |
+| 🟡 **Strong Fallback** | OpenRouter | `qwen/qwen3-coder:free` | Free fallback if primary fails |
+| 🔵 **Medium** | Groq | `openai/gpt-oss-120b` | Fast, reliable |
+| ⚪ **Low** | Ollama | `qwen2.5:7b` | Local, offline-capable |
 
-# The app runs on port 5018 with:
-# - 7 gevent async workers
-# - 1000 concurrent connections per worker
-# - Auto-restart on crash or server reboot
-# - Auto-reload on code changes
-```
+If the strong model fails (e.g., 402 Payment Required), it automatically falls back to the free model, then to Groq, then to Ollama.
+
+---
+
+## 💎 Credits System
+
+Users start with **3 free credits**. Each API call costs credits based on the service and model:
+
+| Service | Strong | Med/Low |
+|:--------|:------:|:-------:|
+| Grammar Analysis | 1.0 | 0.5 |
+| Spelling Check | 1.0 | 0.5 |
+| Dictionary Lookup | 1.0 | 0.5 |
+| Image Analysis | 1.0 | 1.0 |
+| Tashkeel | 0.5 | 0.5 |
+| Morphology | 0.5 | 0.5 |
+| Meanings | 0.5 | 0.5 |
+
+### Purchasing Credits
+
+| Package | Price | Credits |
+|:--------|:-----:|:-------:|
+| 🥉 Basic | $10 | 50 |
+| 🥈 Pro | $20 | 120 |
+| 🥇 Premium | $50 | 300 |
+
+Users upload payment receipts → Admin reviews and approves → Credits added automatically.
+
+### Security
+- Credits stored server-side in Elasticsearch (never in browser)
+- **Atomic deduction** via ES Painless scripting prevents race conditions
+- Server-side validation on every request
+
+---
+
+## 🔐 Authentication
+
+### Signup Flow
+1. User enters name, email, password
+2. Disposable emails are **blocked** (100+ domains)
+3. **6-digit verification code** sent via Gmail SMTP
+4. User enters code on verification page
+5. Account activated → redirected to app
+
+### Login Methods
+- **Email + Password** (bcrypt hashed)
+- **Google OAuth** (one-click sign-in)
+
+### Admin Panel (`/auth/admin`)
+- View all users and their credits
+- Approve/reject credit purchase requests
+- View uploaded payment receipts
+- Add credits directly to any user
 
 ---
 
 ## 📡 API Reference
 
-All API endpoints accept and return JSON. CSRF token required in header: `X-CSRFToken`.
+All API endpoints require authentication. Include the CSRF token in headers.
 
-### Grammar Analysis
+| Method | Endpoint | Description | Credits |
+|:-------|:---------|:-----------|:-------:|
+| `POST` | `/api/analyze` | Grammar analysis | 0.5-1.0 |
+| `POST` | `/api/analyze-image` | Image grammar analysis | 1.0 |
+| `POST` | `/api/spell-check` | Spelling check | 0.5-1.0 |
+| `POST` | `/api/spell-check-image` | Image spelling check | 1.0 |
+| `POST` | `/api/tashkeel` | Add diacritics | 0.5 |
+| `POST` | `/api/morphology` | Morphological analysis | 0.5 |
+| `POST` | `/api/dictionary` | Dictionary lookup | 0.5-1.0 |
+| `GET` | `/auth/api/me` | Current user info | Free |
+| `POST` | `/auth/api/content/save` | Save page content | Free |
+| `POST` | `/auth/api/content/load` | Load page content | Free |
 
-```http
-POST /api/analyze
-Content-Type: application/json
+### Request Example
 
-{
-  "sentence": "ذهب الطالب إلى المدرسة",
-  "mode": "detailed",        // "concise" | "detailed"
-  "power_level": "strong"    // "strong" | "med" | "low"
-}
+```javascript
+const response = await fetch('/api/analyze', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken
+    },
+    body: JSON.stringify({
+        text: 'ذهب الطالبُ إلى المدرسةِ',
+        power_level: 'strong'
+    })
+});
 ```
-
-### Image Analysis
-
-```http
-POST /api/analyze-image
-Content-Type: multipart/form-data
-
-image: <file>
-mode: "detailed"
-power_level: "strong"
-```
-
-### Spell Check
-
-```http
-POST /api/spell-check
-Content-Type: application/json
-
-{
-  "text": "ذهب الطالب الى المدرسه",
-  "power_level": "strong"
-}
-```
-
-### Meanings & Synonyms
-
-```http
-POST /api/meanings
-Content-Type: application/json
-
-{
-  "word": "كتاب",
-  "power_level": "strong"
-}
-```
-
-### Contextual Chat
-
-```http
-POST /api/chat
-Content-Type: application/json
-
-{
-  "question": "لماذا جاءت كلمة الطالب مرفوعة؟",
-  "sentence": "ذهب الطالب إلى المدرسة",
-  "analysis": { ... },
-  "history": [],
-  "power_level": "strong"
-}
-```
-
-### Word Exploration
-
-```http
-POST /api/explore-word
-Content-Type: application/json
-
-{
-  "word": "ذهب",
-  "sentence": "ذهب الطالب إلى المدرسة",
-  "power_level": "strong"
-}
-```
-
-### Tashkeel (Diacritization)
-
-```http
-POST /api/tashkeel
-Content-Type: application/json
-
-{
-  "text": "ذهب الطالب الى المدرسة",
-  "power_level": "strong"
-}
-```
-
-### Morphological Analysis
-
-```http
-POST /api/morphology
-Content-Type: application/json
-
-{
-  "word": "مكتبة",
-  "power_level": "strong"
-}
-```
-
-### Multi-Dictionary Lookup
-
-```http
-POST /api/dictionary
-Content-Type: application/json
-
-{
-  "word": "كتاب",
-  "dictionaries": ["لسان العرب", "المعجم الوسيط", "تاج العروس"],
-  "power_level": "strong"
-}
-```
-
----
-
-## 🛡️ Security & Rate Limiting
-
-| Feature | Implementation |
-|:--------|:--------------|
-| **CSRF Protection** | Flask-WTF CSRFProtect on all POST routes |
-| **Rate Limiting** | 10 requests/min for analysis, 20/min for chat |
-| **Input Validation** | Arabic character detection, text length limits (2000 chars) |
-| **File Validation** | Extension + MIME type checking, 10MB upload limit |
-| **File Cleanup** | Uploaded images are deleted immediately after processing |
-| **Secret Key** | Configurable via environment variable |
-
----
-
-## 🏎️ Performance
-
-Deployed with **Gunicorn + gevent async workers** for production-grade concurrency:
-
-| Metric | Value |
-|:-------|:------|
-| **Workers** | 7 (gevent async) |
-| **Connections/Worker** | 1,000 |
-| **Theoretical Capacity** | 7,000 concurrent connections |
-| **Page Load (p50)** | 7-16ms |
-| **Static Assets (p50)** | 7-12ms |
-| **Worker Recycling** | Every 1,000 requests ± 100 |
-| **Graceful Shutdown** | 30s timeout |
-
-> **Load Test Results**: 200 concurrent users × 60 seconds → **4,465 requests** with **0% failure** on all page loads and static assets. API rate limiting (429) correctly enforced on analysis endpoints.
 
 ---
 
@@ -386,83 +324,102 @@ Deployed with **Gunicorn + gevent async workers** for production-grade concurren
 
 ```
 lisan/
-├── app.py                  # Flask application & routes
-├── gunicorn.conf.py        # Gunicorn production config
-├── ecosystem.config.js     # PM2 deployment config
+├── app.py                  # Main Flask application
 ├── requirements.txt        # Python dependencies
-├── .env                    # Environment variables (not in git)
-├── env.example             # Example environment template
+├── ecosystem.config.js     # PM2 configuration
+├── gunicorn.conf.py        # Gunicorn settings
+├── .env                    # Environment variables (gitignored)
+├── env.example             # Example environment file
 │
-├── ai/                     # AI Provider Layer
-│   ├── router.py           # Multi-provider routing & fallback
-│   ├── providers.py        # OpenRouter, Groq, Ollama clients
-│   └── prompts.py          # Arabic grammar analysis prompts
+├── ai/                     # AI Engine
+│   ├── router.py           # Multi-provider router with fallback
+│   ├── providers.py        # OpenRouter, Groq, Ollama providers
+│   └── prompts.py          # Arabic-optimized system prompts
 │
-├── chat/                   # Chat Module
-│   └── context_chat.py     # Contextual grammar Q&A
+├── auth/                   # Authentication Module (gitignored)
+│   ├── routes.py           # Login, signup, profile, admin routes
+│   ├── models.py           # Elasticsearch user models
+│   ├── decorators.py       # @login_required, @credits_required
+│   ├── email_service.py    # SMTP verification emails
+│   └── google_oauth.py     # Google OAuth integration
+│
+├── chat/                   # Contextual Chat
+│   └── context_chat.py     # Follow-up question handling
+│
+├── vision/                 # Image Processing
+│   └── image_parser.py     # OCR + AI image analysis
 │
 ├── config/                 # Configuration
 │   └── settings.py         # Centralized config from .env
 │
-├── vision/                 # Image Processing
-│   ├── image_parser.py     # Multi-provider image text extraction
-│   └── docling_ocr.py      # Docling OCR fallback
-│
 ├── templates/              # Jinja2 HTML Templates
-│   ├── base.html           # Layout with sidebar & mobile nav
+│   ├── base.html           # Layout with sidebar + mobile nav
 │   ├── grammar.html        # Grammar analysis page
-│   ├── spelling.html       # Spelling correction page
-│   ├── meanings.html       # Meanings & synonyms page
-│   ├── tashkeel.html       # Text diacritization page
+│   ├── spelling.html       # Spelling check page
+│   ├── tashkeel.html       # Diacritization page
 │   ├── morphology.html     # Morphological analysis page
-│   ├── grammar_bank.html   # Grammar rules reference
-│   └── dictionary.html     # Multi-dictionary lookup page
+│   ├── dictionary.html     # Dictionary lookup page
+│   ├── meanings.html       # Meanings page
+│   └── grammar_bank.html   # Grammar rules bank (50+ rules)
 │
-├── static/
-│   ├── css/
-│   │   ├── layout.css      # Layout & responsive design
-│   │   └── styles.css      # Component styles & themes
-│   ├── js/
-│   │   ├── layout.js       # Navigation & sidebar logic
-│   │   ├── app.js          # Grammar analysis frontend
-│   │   ├── spelling.js     # Spelling page frontend
-│   │   ├── meanings.js     # Meanings page frontend
-│   │   ├── tashkeel.js     # Tashkeel page frontend
-│   │   ├── morphology.js   # Morphology page frontend
-│   │   └── dictionary.js   # Dictionary page frontend
-│   └── img/
-│       └── favicon.png     # Lisan golden logo
-│
-└── uploads/                # Temporary image uploads (auto-cleaned)
+└── static/
+    ├── css/                # Stylesheets
+    │   ├── layout.css      # Core layout + responsive design
+    │   ├── grammar.css     # Grammar page styles
+    │   └── ...             # Per-page styles
+    ├── js/                 # JavaScript
+    │   ├── layout.js       # Shared: API, loading, credits, toast
+    │   ├── grammar.js      # Grammar page logic
+    │   └── ...             # Per-page scripts
+    └── img/
+        └── favicon.png     # App icon
 ```
 
 ---
 
-## 🛠️ Technology Stack
+## 🌐 Deployment
 
-| Layer | Technology | Purpose |
-|:------|:-----------|:--------|
-| **Backend** | Flask 3.x | Web framework |
-| **WSGI Server** | Gunicorn + gevent | Production server with async workers |
-| **Process Manager** | PM2 | Auto-restart, file watching, log management |
-| **AI (Primary)** | OpenRouter → Gemini Pro | Advanced grammar analysis |
-| **AI (Secondary)** | Groq → GPT-OSS 120B | Standard analysis with fast inference |
-| **AI (Fallback)** | Ollama → Qwen 2.5 | Local/offline analysis |
-| **OCR** | AI Vision + Docling | Arabic text extraction from images |
-| **Frontend** | Vanilla HTML/CSS/JS | Responsive RTL interface |
-| **Security** | Flask-WTF, Flask-Limiter | CSRF protection, rate limiting |
+### Nginx Configuration
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name lisan.alaadin-alynaey.site;
+
+    ssl_certificate /path/to/cert.pem;
+    ssl_certificate_key /path/to/key.pem;
+
+    location / {
+        proxy_pass http://127.0.0.1:5018;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    client_max_body_size 10M;
+}
+```
 
 ---
 
 ## 👨‍💻 Developer
 
-<p align="center">
-  Made by <a href="https://alaadin-alynaey.site/"><strong>Alaadin Alynaey</strong></a><br>
-  AI Engineer
-</p>
+<div align="center">
+
+**Alaadin Alynaey**
+
+[![GitHub](https://img.shields.io/badge/GitHub-AladdinAlynaey-181717?style=for-the-badge&logo=github)](https://github.com/AladdinAlynaey)
+[![Email](https://img.shields.io/badge/Email-alaadinalynaey@gmail.com-D14836?style=for-the-badge&logo=gmail)](mailto:alaadinalynaey@gmail.com)
+
+</div>
 
 ---
 
-<p align="center">
-  <strong>لِسَان</strong> — Because every Arabic sentence tells a story through its grammar ✨
-</p>
+<div align="center">
+
+**لِسَان** — *اللغة العربية بالذكاء الاصطناعي* 🌙
+
+*Built with ❤️ for the Arabic language*
+
+</div>
