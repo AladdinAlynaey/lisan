@@ -56,6 +56,10 @@ class OpenRouterProvider:
     def timeout(self):
         return int(_get_env("AI_TIMEOUT", "30"))
 
+    @property
+    def fallback_model(self):
+        return _get_env("OPENROUTER_FALLBACK_MODEL", "qwen/qwen3-coder:free")
+
     def _headers(self):
         return {
             "Authorization": f"Bearer {self.api_key}",
@@ -69,31 +73,40 @@ class OpenRouterProvider:
         return key and not key.startswith("your-") and len(key) > 10
 
     def chat(self, messages, model_override=None):
-        """Send a chat completion request."""
+        """Send a chat completion request. Falls back to secondary model on failure."""
         if not self._is_configured():
             raise ProviderError("OpenRouter API key not configured")
 
-        payload = {
-            "model": model_override or self.model,
-            "messages": messages,
-            "temperature": 0.2,
-            "max_tokens": 4096
-        }
+        models_to_try = [model_override or self.model, self.fallback_model]
+        last_error = None
 
-        try:
-            resp = requests.post(
-                f"{self.base_url}/chat/completions",
-                headers=self._headers(),
-                json=payload,
-                timeout=self.timeout
-            )
-            resp.raise_for_status()
-            data = resp.json()
-            content = data["choices"][0]["message"]["content"]
-            return content
-        except Exception as e:
-            logger.error(f"OpenRouter chat error: {e}")
-            raise ProviderError(f"OpenRouter failed: {e}")
+        for model in models_to_try:
+            payload = {
+                "model": model,
+                "messages": messages,
+                "temperature": 0.2,
+                "max_tokens": 4096
+            }
+
+            try:
+                resp = requests.post(
+                    f"{self.base_url}/chat/completions",
+                    headers=self._headers(),
+                    json=payload,
+                    timeout=self.timeout
+                )
+                resp.raise_for_status()
+                data = resp.json()
+                content = data["choices"][0]["message"]["content"]
+                if model != models_to_try[0]:
+                    logger.info(f"OpenRouter succeeded with fallback model: {model}")
+                return content
+            except Exception as e:
+                logger.warning(f"OpenRouter model {model} failed: {e}")
+                last_error = e
+                continue
+
+        raise ProviderError(f"OpenRouter all models failed: {last_error}")
 
     def vision(self, image_b64, prompt, mime_type="image/png"):
         """Send an image + prompt to the vision model."""

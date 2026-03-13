@@ -107,22 +107,32 @@
         });
     };
 
-    // ── Content Persistence (localStorage, 30 min) ─
-    window.lisan.savePageContent = function (key, data) {
-        const entry = { data, ts: Date.now() };
-        try { localStorage.setItem('lisan_' + key, JSON.stringify(entry)); } catch (e) {}
+    // ── Content Persistence (server-side, per-user, 30 min TTL) ─
+    window.lisan.savePageContent = async function (page, data) {
+        try {
+            await fetch('/auth/api/content/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': window.lisan.csrfToken
+                },
+                body: JSON.stringify({ page, content: data })
+            });
+        } catch (e) { /* silent */ }
     };
 
-    window.lisan.loadPageContent = function (key, maxAgeMs = 30 * 60 * 1000) {
+    window.lisan.loadPageContent = async function (page) {
         try {
-            const raw = localStorage.getItem('lisan_' + key);
-            if (!raw) return null;
-            const entry = JSON.parse(raw);
-            if (Date.now() - entry.ts > maxAgeMs) {
-                localStorage.removeItem('lisan_' + key);
-                return null;
-            }
-            return entry.data;
+            const r = await fetch('/auth/api/content/load', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': window.lisan.csrfToken
+                },
+                body: JSON.stringify({ page })
+            });
+            const d = await r.json();
+            return d.content || null;
         } catch (e) { return null; }
     };
 

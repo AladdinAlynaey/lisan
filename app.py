@@ -137,7 +137,7 @@ def meanings_page():
 
 @app.route("/api/analyze", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
-@credits_required
+@credits_required("analyze")
 def analyze():
     """
     Analyze an Arabic sentence grammatically.
@@ -193,7 +193,7 @@ def analyze():
 
 @app.route("/api/analyze-image", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
-@credits_required
+@credits_required("image")
 def analyze_image():
     """
     Upload an image, extract Arabic text, and analyze it.
@@ -404,7 +404,7 @@ def not_found(e):
 
 @app.route("/api/spell-check", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
-@credits_required
+@credits_required("spell")
 def spell_check():
     """Check spelling of Arabic text."""
     try:
@@ -437,7 +437,7 @@ def spell_check():
 
 @app.route("/api/spell-check-image", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
-@credits_required
+@credits_required("image")
 def spell_check_image():
     """Extract text from image and check spelling."""
     try:
@@ -534,7 +534,7 @@ def tashkeel_page():
 
 @app.route("/api/tashkeel", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
-@credits_required
+@credits_required("tashkeel")
 def tashkeel():
     """Add diacritics to Arabic text."""
     try:
@@ -578,7 +578,7 @@ def morphology_page():
 
 @app.route("/api/morphology", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
-@credits_required
+@credits_required("morphology")
 def morphology():
     """Perform morphological analysis on an Arabic word."""
     try:
@@ -634,7 +634,7 @@ def dictionary_page():
 
 @app.route("/api/dictionary", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
-@credits_required
+@credits_required("dictionary")
 def dictionary_lookup():
     """Look up a word in multiple Arabic dictionaries."""
     try:
