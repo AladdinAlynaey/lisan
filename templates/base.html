@@ -111,6 +111,38 @@
                 <span class="nav-label">المعاجم اللغوية</span>
             </a>
         </nav>
+
+        <!-- Auth Section -->
+        <div style="padding: 0.5rem 0.75rem; margin-top: auto; border-top: 1px solid rgba(201,164,60,0.08);">
+            {% if is_logged_in %}
+            <a href="/auth/profile" class="nav-item {% if active_page == 'profile' %}active{% endif %}" style="margin-bottom:0.3rem;">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+                <span class="nav-label">الملف الشخصي</span>
+                <span style="background:rgba(201,164,60,0.15); color:var(--gold-primary); padding:0.1rem 0.45rem; border-radius:10px; font-size:0.7rem; font-weight:700; margin-right:auto;">{{ user_credits }}</span>
+            </a>
+            {% if is_admin %}
+            <a href="/auth/admin" class="nav-item {% if active_page == 'admin' %}active{% endif %}" style="margin-bottom:0.3rem;">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+                <span class="nav-label">الإدارة</span>
+            </a>
+            {% endif %}
+            {% else %}
+            <a href="/auth/login" class="nav-item {% if active_page == 'login' %}active{% endif %}" style="margin-bottom:0.3rem;">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/>
+                    <polyline points="10 17 15 12 10 7"/>
+                    <line x1="15" y1="12" x2="3" y2="12"/>
+                </svg>
+                <span class="nav-label">تسجيل الدخول</span>
+            </a>
+            {% endif %}
+        </div>
+
         <div class="sidebar-footer">
             <div class="sidebar-dev">
                 تطوير <a href="https://alaadin-alynaey.site/" target="_blank" rel="noopener">Alaadin Alynaey</a>

@@ -8,6 +8,7 @@ import json
 import uuid
 import logging
 from pathlib import Path
+from datetime import timedelta
 
 from flask import (
     Flask, render_template, request, jsonify,
@@ -24,6 +25,11 @@ from ai.providers import ProviderError
 from vision.image_parser import extract_text_from_image
 from chat.context_chat import ContextChat
 
+# ── Auth ─────────────────────────────────────────────
+from auth import auth_bp
+from auth.decorators import login_required, credits_required, get_current_user
+from auth.models import use_credit
+
 # ── Logging ───────────────────────────────────────────
 logging.basicConfig(
     level=logging.INFO,
@@ -35,6 +41,10 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 app.config["SECRET_KEY"] = Config.SECRET_KEY
 app.config["MAX_CONTENT_LENGTH"] = Config.MAX_CONTENT_LENGTH
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=30)
+
+# ── Register Auth Blueprint ──────────────────────────
+app.register_blueprint(auth_bp)
 
 # ── CSRF Protection ──────────────────────────────────
 csrf = CSRFProtect(app)
@@ -49,6 +59,22 @@ limiter = Limiter(
 # ── Services ─────────────────────────────────────────
 ai_router = AIRouter()
 context_chat = ContextChat()
+
+
+# ── Template Context — inject user info ──────────────
+@app.context_processor
+def inject_auth():
+    """Make current user info available in all templates."""
+    user_id = session.get("user_id")
+    if user_id:
+        user = get_current_user()
+        return {
+            "current_user": user,
+            "is_logged_in": True,
+            "user_credits": user.get("credits", 0) if user else 0,
+            "is_admin": user.get("is_admin", False) if user else False
+        }
+    return {"current_user": None, "is_logged_in": False, "user_credits": 0, "is_admin": False}
 
 # ── Upload Directory ─────────────────────────────────
 UPLOAD_DIR = Path(__file__).parent / "uploads"
@@ -108,6 +134,7 @@ def meanings_page():
 
 @app.route("/api/analyze", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
+@credits_required
 def analyze():
     """
     Analyze an Arabic sentence grammatically.
@@ -163,6 +190,7 @@ def analyze():
 
 @app.route("/api/analyze-image", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
+@credits_required
 def analyze_image():
     """
     Upload an image, extract Arabic text, and analyze it.
@@ -373,6 +401,7 @@ def not_found(e):
 
 @app.route("/api/spell-check", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
+@credits_required
 def spell_check():
     """Check spelling of Arabic text."""
     try:
@@ -405,6 +434,7 @@ def spell_check():
 
 @app.route("/api/spell-check-image", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
+@credits_required
 def spell_check_image():
     """Extract text from image and check spelling."""
     try:
@@ -500,6 +530,7 @@ def tashkeel_page():
 
 @app.route("/api/tashkeel", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
+@credits_required
 def tashkeel():
     """Add diacritics to Arabic text."""
     try:
@@ -542,6 +573,7 @@ def morphology_page():
 
 @app.route("/api/morphology", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
+@credits_required
 def morphology():
     """Perform morphological analysis on an Arabic word."""
     try:
@@ -595,6 +627,7 @@ def dictionary_page():
 
 @app.route("/api/dictionary", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
+@credits_required
 def dictionary_lookup():
     """Look up a word in multiple Arabic dictionaries."""
     try:
