@@ -29,10 +29,19 @@
 
 <body>
 
+    <!-- ═══ Mobile Header ═══ -->
+    <header class="mobile-header" id="mobile-header">
+        <img src="{{ url_for('static', filename='img/favicon.png') }}" alt="لِسَان" class="mobile-header-logo">
+        <div class="mobile-header-text">
+            <h1 class="mobile-header-title">لِسَان</h1>
+            <p class="mobile-header-sub">اللغة العربية بالذكاء الاصطناعي</p>
+        </div>
+    </header>
+
     <!-- ═══ Sidebar (Desktop) ═══ -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h1 class="sidebar-logo">لِسَان</h1>
+            <img src="{{ url_for('static', filename='img/favicon.png') }}" alt="لِسَان" class="sidebar-logo-img">
             <p class="sidebar-subtitle">اللغة العربية بالذكاء الاصطناعي</p>
         </div>
         <nav class="sidebar-nav">

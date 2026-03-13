@@ -72,24 +72,31 @@
 
         let html = '';
 
-        // Root & lookup method
-        if (r.root || r.lookup_method) {
+        // Root & stripping steps
+        if (r.root || r.stripping_steps) {
             html += `
                 <div class="meaning-block">
                     <div class="meaning-block-title"><span class="icon">🌱</span> معلومات الكشف</div>
                     <div class="meaning-text">
                         ${r.root ? `<strong>الجذر:</strong> ${r.root}<br>` : ''}
-                        ${r.lookup_method ? `<strong>طريقة الكشف:</strong> ${r.lookup_method}` : ''}
+                        ${r.stripping_steps ? `<strong>خطوات التجريد:</strong> ${r.stripping_steps}` : ''}
                     </div>
                 </div>`;
         }
 
-        // Dictionary entries
+        // Dictionary entries with باب system
         if (r.dictionaries && r.dictionaries.length) {
             r.dictionaries.forEach(d => {
                 html += `
                     <div class="meaning-block" style="border-right: 3px solid var(--accent, #c9a43c);">
                         <div class="meaning-block-title"><span class="icon">📚</span> ${d.name} ${d.author ? `<span style="opacity:0.6; font-size:0.85rem;">— ${d.author}</span>` : ''}</div>
+                        ${d.lookup_method || d.chapter || d.section || d.lookup_steps ? `
+                            <div style="background: var(--bg-input, rgba(255,255,255,0.04)); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.75rem; font-size: 0.9rem;">
+                                ${d.lookup_method ? `<strong>طريقة الكشف:</strong> ${d.lookup_method}<br>` : ''}
+                                ${d.chapter ? `<strong>الباب:</strong> ${d.chapter}${d.section ? ` → <strong>الفصل:</strong> ${d.section}` : ''}<br>` : ''}
+                                ${d.lookup_steps ? `<strong>خطوات الكشف:</strong> ${d.lookup_steps}` : ''}
+                            </div>
+                        ` : ''}
                         <div class="meaning-text">${d.definition || ''}</div>
                         ${d.examples && d.examples.length ? `
                             <div style="margin-top:0.5rem;">

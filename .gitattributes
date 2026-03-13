@@ -1,0 +1,5 @@
+# Force GitHub to recognize this as Python
+*.css linguist-vendored
+*.js linguist-vendored
+*.html linguist-documentation
+*.py linguist-detectable=true
