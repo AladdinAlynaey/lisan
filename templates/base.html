@@ -42,7 +42,7 @@
             <a href="/auth/admin" class="mobile-hdr-icon" title="لوحة الإدارة">🛡️</a>
             {% endif %}
             <a href="/auth/profile" class="mobile-hdr-icon" title="الملف الشخصي">
-                <span class="mobile-credits-badge">{{ user_credits }}💎</span>
+                <span class="mobile-credits-badge">👤 {{ user_credits }}</span>
             </a>
         </div>
     </header>
@@ -56,8 +56,9 @@
             <p class="sidebar-subtitle">اللغة العربية بالذكاء الاصطناعي</p>
         </div>
         <a href="/auth/profile" class="credits-badge" title="أرصدتك">
-            <span>💎</span>
+            <span>👤</span>
             <span class="cb-num">{{ user_credits }}</span>
+            <span>💎</span>
             <span class="cb-label">رصيد</span>
         </a>
         {% if is_logged_in %}
@@ -133,14 +134,6 @@
         <!-- Auth Section -->
         <div style="padding: 0.5rem 0.75rem; margin-top: auto; border-top: 1px solid rgba(201,164,60,0.08);">
             {% if is_logged_in %}
-            <a href="/auth/profile" class="nav-item {% if active_page == 'profile' %}active{% endif %}" style="margin-bottom:0.3rem;">
-                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                    <circle cx="12" cy="7" r="4"/>
-                </svg>
-                <span class="nav-label">الملف الشخصي</span>
-                <span style="background:rgba(201,164,60,0.15); color:var(--gold-primary); padding:0.1rem 0.45rem; border-radius:10px; font-size:0.7rem; font-weight:700; margin-right:auto;">{{ user_credits }}</span>
-            </a>
             {% if is_admin %}
             <a href="/auth/admin" class="nav-item {% if active_page == 'admin' %}active{% endif %}" style="margin-bottom:0.3rem;">
                 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -232,13 +225,7 @@
             </svg>
             <span>المعاجم</span>
         </a>
-        <a href="/auth/profile" class="bottom-nav-item {% if active_page == 'profile' %}active{% endif %}">
-            <svg class="bottom-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-            </svg>
-            <span>{{ user_credits }}💎</span>
-        </a>
+
     </nav>
     {% endif %}
 
