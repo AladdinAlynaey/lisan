@@ -494,6 +494,8 @@ def spell_check_image():
 
 @app.route("/api/meanings", methods=["POST"])
 @limiter.limit(Config.RATE_LIMIT_ANALYZE)
+@login_required
+@credits_required("meanings")
 def find_meanings():
     """Find meanings, synonyms, antonyms for a word."""
     try:
